@@ -6,6 +6,7 @@ const config: Config = {
 		extend: {
 			gridTemplateColumns: {
 				giftResumeTemplateColumns: 'repeat(3, minmax(100px, 1fr))',
+				form: 'minmax(7.5rem, 17.5rem) minmax(25rem, 1fr) minmax(0, 15rem)',
 			},
 			gridTemplateRows: {
 				giftResumeTemplateRows: 'repeat(2, 100px)',

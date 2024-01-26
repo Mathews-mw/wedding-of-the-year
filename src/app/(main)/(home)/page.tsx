@@ -1,16 +1,16 @@
 'use client';
 
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 import { twMerge } from 'tailwind-merge';
 import { Libre_Baskerville } from 'next/font/google';
-import { motion } from 'framer-motion';
 
-import { Camera, Church, Clock5, Gift, MapPin, PartyPopper } from 'lucide-react';
-
-import WeddingIllustration from '../../../public/wedding-illustration.jpg';
 import Link from 'next/link';
 import { Button } from '@/components/Buttons';
 import { giftList } from '@/data/gift-list';
+
+import { Camera, Church, Clock5, Gift, MapPin, PartyPopper } from 'lucide-react';
+import WeddingIllustration from '../../../../public/wedding-illustration.jpg';
 
 const libreBaskerville = Libre_Baskerville({
 	subsets: ['latin'],
@@ -73,10 +73,12 @@ export default function Home() {
 
 			<div className="space-y-4">
 				<a id="recepcao" className="hidden"></a>
+
 				<div className="flex items-start space-x-3">
 					<Church className="h-6 w-6" />
 					<span className="text-xl font-semibold">Recepção</span>
 				</div>
+
 				<div className="grid grid-cols-2">
 					<div className="flex flex-col space-y-4">
 						<p>
@@ -147,7 +149,7 @@ export default function Home() {
 						</div>
 					</div>
 
-					<div className="grid-cols-giftResumeTemplateColumns grid-rows-giftResumeTemplateRows grid gap-4">
+					<div className="grid grid-cols-giftResumeTemplateColumns grid-rows-giftResumeTemplateRows gap-4">
 						{resumeGiftList.map((gift) => {
 							return (
 								<div key={gift.id} className="">
