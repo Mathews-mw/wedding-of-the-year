@@ -1,28 +1,47 @@
 'use client';
 
 import Image from 'next/image';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { twMerge } from 'tailwind-merge';
+import { useQuery } from '@tanstack/react-query';
+import { Gift as GiftPrisma } from '@prisma/client';
 
+import { api } from '@/lib/axios';
+import { GiftList } from './GiftList';
 import { useStore } from '@/zustand-store';
-import { giftList } from '@/data/gift-list';
 import { Button } from '@/components/Buttons';
 import { Select } from '@/components/Form/Select';
 import { EmptyCartModal } from './modals/EmptyCartModal';
-import { GiftDetailModal } from './modals/GiftDetailModal';
 import { ShoppingCartModal } from './modals/ShoppingCartModal';
 import { SelectItem } from '@/components/Form/Select/SelectItem';
 
-import { HandHeart } from '@phosphor-icons/react';
-import { Gift, ShoppingBag, ShoppingCart } from 'lucide-react';
+import { ShoppingCart } from 'lucide-react';
+import { GiftListLoading } from './GiftListLoading';
 import WeddingGifts from '../../../../public/wedding-gifts.png';
 
 export default function PresentesPage() {
+	const [sortListValue, setSortListValue] = useState('asc');
+
+	console.log(sortListValue);
+
 	const { order } = useStore((store) => {
 		return {
 			order: store.order,
 			addToOrder: store.addToOrder,
 		};
+	});
+
+	const { data: gifts, isFetching } = useQuery<GiftPrisma[]>({
+		queryKey: ['gifts', sortListValue],
+		queryFn: async () => {
+			const { data } = await api.get('/gifts', {
+				params: {
+					sort: sortListValue,
+				},
+			});
+
+			return data;
+		},
 	});
 
 	return (
@@ -86,7 +105,12 @@ export default function PresentesPage() {
 						<label htmlFor="list-order" className="text-nowrap text-lg font-semibold">
 							Ordenar a lista
 						</label>
-						<Select placeholder="Selecione um valor" defaultValue="asc">
+						<Select
+							placeholder="Selecione um valor"
+							defaultValue="asc"
+							value={sortListValue}
+							onValueChange={(value) => setSortListValue(value)}
+						>
 							<SelectItem value="asc" text="A-Z" />
 							<SelectItem value="desc" text="Z-A" />
 							<SelectItem value="lowest" text="Menor preço" />
@@ -95,61 +119,7 @@ export default function PresentesPage() {
 					</div>
 				</div>
 
-				<div className="grid grid-cols-giftListTemplateColumns grid-rows-giftListTemplateRows gap-4">
-					{giftList.map((gift) => {
-						return (
-							<motion.div
-								key={gift.id}
-								whileHover={{ scale: 1.03 }}
-								transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-								className={twMerge([
-									'flex flex-col items-center justify-center space-y-2 rounded-lg border border-slate-200 p-4 shadow-sm',
-									`${gift.available ? 'opacity-100' : 'opacity-50'}`,
-								])}
-							>
-								<Image
-									src={gift.image}
-									quality={100}
-									alt={gift.title}
-									width={320}
-									height={320}
-									className="h-[208px] w-[208px] rounded-lg object-cover"
-								/>
-
-								<span className="text-center text-sm">{gift.title}</span>
-
-								<span className="font-semibold text-slate-600">
-									{gift.price.toLocaleString('pt-BR', {
-										style: 'currency',
-										currency: 'BRL',
-									})}
-								</span>
-
-								{order.find((item) => item.id === gift.id) ? (
-									<div className="flex items-center justify-center gap-2 text-rose-400">
-										<ShoppingBag className="h-5 w-5" />
-										<span>No carrinho</span>
-									</div>
-								) : gift.available ? (
-									<GiftDetailModal
-										gift={gift}
-										trigger={
-											<Button className="flex items-center justify-center gap-2">
-												<Gift className="h-5 w-5" />
-												Presentear
-											</Button>
-										}
-									/>
-								) : (
-									<div className="flex items-center justify-center gap-2 text-rose-400">
-										<HandHeart className="h-5 w-5" />
-										<span>Comprado</span>
-									</div>
-								)}
-							</motion.div>
-						);
-					})}
-				</div>
+				{isFetching || !gifts ? <GiftListLoading /> : <GiftList gifts={gifts} />}
 			</div>
 		</div>
 	);

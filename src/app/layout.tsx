@@ -1,5 +1,7 @@
-import { TanstackQueryClientProvider } from '@/providers/TanstackQueryClientProvider';
 import './globals.css';
+import 'react-loading-skeleton/dist/skeleton.css';
+
+import { TanstackQueryClientProvider } from '@/providers/TanstackQueryClientProvider';
 
 import type { Metadata } from 'next';
 import { Nunito } from 'next/font/google';

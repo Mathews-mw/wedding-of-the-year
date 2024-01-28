@@ -61,7 +61,7 @@ export const giftList: IGift[] = [
 		available: true,
 	},
 	{
-		id: '',
+		id: '08dae937-570f-4870-94fa-6a35b47dc768',
 		title: 'Álbum de Fotos do Casal',
 		description:
 			'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis exercitationem explicabo fuga a dicta quam tenetur aperiam, soluta asperiores quod vero suscipit iure ad reprehenderit, quas recusandae nisi aliquid repudiandae.',
@@ -75,7 +75,7 @@ export const giftList: IGift[] = [
 		description:
 			'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis exercitationem explicabo fuga a dicta quam tenetur aperiam, soluta asperiores quod vero suscipit iure ad reprehenderit, quas recusandae nisi aliquid repudiandae.',
 		image: 'https://images.unsplash.com/photo-1580327344181-c1163234e5a0',
-		price: 500.0,
+		price: 2500.0,
 		available: true,
 	},
 	{
@@ -84,7 +84,7 @@ export const giftList: IGift[] = [
 		description:
 			'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis exercitationem explicabo fuga a dicta quam tenetur aperiam, soluta asperiores quod vero suscipit iure ad reprehenderit, quas recusandae nisi aliquid repudiandae.',
 		image: 'https://images.unsplash.com/photo-1617784625140-515e220ba148',
-		price: 220.0,
+		price: 220.5,
 		available: false,
 	},
 	{
@@ -102,7 +102,25 @@ export const giftList: IGift[] = [
 		description:
 			'Ambiente tranquilo, velas aromáticas, óleos essenciais e o que mais for necessário para o casal relaxar e desfrutar de momentos tranquilos juntos.',
 		image: 'https://images.unsplash.com/photo-1620733723572-11c53f73a416',
-		price: 120.0,
-		available: false,
+		price: 420.0,
+		available: true,
+	},
+	{
+		id: 'c9512da8-db01-4306-baa9-a88383dd8c0a',
+		title: 'Vale presente',
+		description:
+			'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis exercitationem explicabo fuga a dicta quam tenetur aperiam, soluta asperiores quod vero suscipit iure ad reprehenderit, quas recusandae nisi aliquid repudiandae.',
+		image: 'https://images.unsplash.com/photo-1526614180703-827d23e7c8f2',
+		price: 520.0,
+		available: true,
+	},
+	{
+		id: 'd7af6f6f-3d9c-46ab-961e-a3c5fda2e6d9',
+		title: 'Compra moeda local',
+		description:
+			'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis exercitationem explicabo fuga a dicta quam tenetur aperiam, soluta asperiores quod vero suscipit iure ad reprehenderit, quas recusandae nisi aliquid repudiandae.',
+		image: 'https://images.unsplash.com/photo-1554768804-50c1e2b50a6e',
+		price: 370.0,
+		available: true,
 	},
 ];

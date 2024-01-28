@@ -13,6 +13,7 @@
     "@formkit/auto-animate": "^0.8.1",
     "@hookform/resolvers": "^3.3.4",
     "@phosphor-icons/react": "^2.0.15",
+    "@prisma/client": "^5.8.1",
     "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-select": "^2.0.0",
     "@tanstack/react-query": "^5.17.19",
@@ -25,6 +26,7 @@
     "react-dom": "^18",
     "react-hook-form": "^7.49.3",
     "react-input-mask": "^2.0.4",
+    "react-loading-skeleton": "^3.3.1",
     "tailwind-merge": "^2.2.1",
     "tailwind-variants": "^0.1.20",
     "zod": "^3.22.4",
@@ -43,6 +45,7 @@
     "postcss": "^8",
     "prettier": "^3.2.4",
     "prettier-plugin-tailwindcss": "^0.5.11",
+    "prisma": "^5.8.1",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
   }
