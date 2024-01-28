@@ -6,11 +6,18 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "server": "json-server server.json -w -d 1000 -p 3737"
   },
   "dependencies": {
+    "@formkit/auto-animate": "^0.8.1",
     "@hookform/resolvers": "^3.3.4",
+    "@phosphor-icons/react": "^2.0.15",
+    "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-select": "^2.0.0",
+    "@tanstack/react-query": "^5.17.19",
+    "@tanstack/react-query-devtools": "^5.17.21",
+    "axios": "^1.6.7",
     "framer-motion": "^11.0.2",
     "lucide-react": "^0.314.0",
     "next": "14.1.0",
@@ -20,7 +27,8 @@
     "react-input-mask": "^2.0.4",
     "tailwind-merge": "^2.2.1",
     "tailwind-variants": "^0.1.20",
-    "zod": "^3.22.4"
+    "zod": "^3.22.4",
+    "zustand": "^4.5.0"
   },
   "devDependencies": {
     "@rocketseat/eslint-config": "^2.1.0",
@@ -31,6 +39,7 @@
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.1.0",
+    "json-server": "0.17",
     "postcss": "^8",
     "prettier": "^3.2.4",
     "prettier-plugin-tailwindcss": "^0.5.11",

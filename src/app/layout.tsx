@@ -1,3 +1,4 @@
+import { TanstackQueryClientProvider } from '@/providers/TanstackQueryClientProvider';
 import './globals.css';
 
 import type { Metadata } from 'next';
@@ -20,7 +21,9 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="pt-br" className="min-h-screen antialiased">
-			<body className={nunitoSans.className}>{children}</body>
+			<body className={nunitoSans.className}>
+				<TanstackQueryClientProvider>{children}</TanstackQueryClientProvider>
+			</body>
 		</html>
 	);
 }

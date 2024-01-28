@@ -6,36 +6,26 @@ const config: Config = {
 		extend: {
 			gridTemplateColumns: {
 				giftResumeTemplateColumns: 'repeat(3, minmax(100px, 1fr))',
+				giftListTemplateColumns: 'repeat(auto-fit, minmax(208px, 1fr))',
 				form: 'minmax(7.5rem, 17.5rem) minmax(25rem, 1fr) minmax(0, 15rem)',
 			},
 			gridTemplateRows: {
 				giftResumeTemplateRows: 'repeat(2, 100px)',
+				giftListTemplateRows: 'repeat(auto-fit, minmax(208px, 1fr))',
 			},
-			colors: {
-				main: {
-					50: '#fefcfb',
-					100: '#fdf7f5',
-					200: '#fcf2ee',
-					300: '#fbece7',
-					400: '#fae8e2',
-					500: '#f9e4dd',
-					600: '#f8e1d9',
-					700: '#f7ddd4',
-					800: '#f6d9cf',
-					900: '#f5d1c7',
+			keyframes: {
+				overlayShow: {
+					from: { opacity: '0' },
+					to: { opacity: '1' },
 				},
-				secondary: {
-					50: '#f9f3f1',
-					100: '#efe1dc',
-					200: '#e4cdc5',
-					300: '#d9b8ae',
-					400: '#d1a99c',
-					500: '#c99a8b',
-					600: '#c39283',
-					700: '#bc8878',
-					800: '#b57e6e',
-					900: '#a96c5b',
+				contentShow: {
+					from: { opacity: '0', transform: 'translate(-50%, -48%) scale(0.96)' },
+					to: { opacity: '1', transform: 'translate(-50%, -50%) scale(1)' },
 				},
+			},
+			animation: {
+				overlayShow: 'overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1)',
+				contentShow: 'contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1)',
 			},
 		},
 	},

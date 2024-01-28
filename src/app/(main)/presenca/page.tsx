@@ -59,7 +59,7 @@ export default function Presenca() {
 			</div>
 
 			<form className="mt-8 space-y-6 rounded-lg border border-slate-200 p-8 shadow-sm">
-				<div className="lg:grid-cols-form flex flex-col gap-3 pt-5 lg:grid">
+				<div className="flex flex-col gap-3 pt-5 lg:grid lg:grid-cols-form">
 					<label htmlFor="name" className="font-semibold">
 						Nome completo
 					</label>
@@ -69,7 +69,7 @@ export default function Presenca() {
 					</InputRoot>
 				</div>
 
-				<div className="lg:grid-cols-form flex flex-col gap-3 pt-5 lg:grid">
+				<div className="flex flex-col gap-3 pt-5 lg:grid lg:grid-cols-form">
 					<label htmlFor="guests" className="font-semibold">
 						Quantidade de familiares
 					</label>
@@ -87,7 +87,7 @@ export default function Presenca() {
 					</div>
 				</div>
 
-				<div className="lg:grid-cols-form flex flex-col gap-3 pt-5 lg:grid">
+				<div className="flex flex-col gap-3 pt-5 lg:grid lg:grid-cols-form">
 					<label htmlFor="email" className="font-semibold">
 						E-mail
 					</label>
@@ -97,7 +97,7 @@ export default function Presenca() {
 					</InputRoot>
 				</div>
 
-				<div className="lg:grid-cols-form flex flex-col gap-3 pt-5 lg:grid">
+				<div className="flex flex-col gap-3 pt-5 lg:grid lg:grid-cols-form">
 					<label htmlFor="phone" className="font-semibold">
 						Telefone para contato
 					</label>
