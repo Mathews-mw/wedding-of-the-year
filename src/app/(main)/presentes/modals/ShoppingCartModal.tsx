@@ -11,6 +11,7 @@ import { useStore } from '@/zustand-store';
 import { Button } from '@/components/Buttons';
 
 import { X } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 interface IModalProps {
 	trigger: ReactNode;
@@ -18,6 +19,8 @@ interface IModalProps {
 }
 
 export function ShoppingCartModal({ trigger, gifts }: IModalProps) {
+	const router = useRouter();
+
 	const [parent] = useAutoAnimate();
 
 	const { removeToOrder } = useStore((store) => {
@@ -110,7 +113,7 @@ export function ShoppingCartModal({ trigger, gifts }: IModalProps) {
 
 						{gifts.length > 0 && (
 							<Dialog.Close asChild className="">
-								<Button>Finalizar comprar</Button>
+								<Button onClick={() => router.push('/pedido')}>Finalizar comprar</Button>
 							</Dialog.Close>
 						)}
 					</div>

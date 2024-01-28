@@ -8,13 +8,14 @@ import { useStore } from '@/zustand-store';
 import { giftList } from '@/data/gift-list';
 import { Button } from '@/components/Buttons';
 import { Select } from '@/components/Form/Select';
+import { EmptyCartModal } from './modals/EmptyCartModal';
 import { GiftDetailModal } from './modals/GiftDetailModal';
+import { ShoppingCartModal } from './modals/ShoppingCartModal';
 import { SelectItem } from '@/components/Form/Select/SelectItem';
 
 import { HandHeart } from '@phosphor-icons/react';
 import { Gift, ShoppingBag, ShoppingCart } from 'lucide-react';
 import WeddingGifts from '../../../../public/wedding-gifts.png';
-import { ShoppingCartModal } from './modals/ShoppingCartModal';
 
 export default function PresentesPage() {
 	const { order } = useStore((store) => {
@@ -51,26 +52,35 @@ export default function PresentesPage() {
 						src={WeddingGifts}
 						quality={100}
 						alt=""
-						className="h-96 rounded-lg object-cover drop-shadow-lg"
+						className="h-96 rounded-lg object-cover"
 					/>
 				</motion.div>
 			</div>
 
 			<div className="mt-8 space-y-4">
 				<div className="flex w-full justify-between">
-					<ShoppingCartModal
-						gifts={order}
-						trigger={
-							<Button className="flex items-center gap-4">
-								<ShoppingCart className="h-5 w-5" />
-								{order.length === 0
-									? 'Carrinho vazio'
-									: order.length === 1
+					{order.length <= 0 ? (
+						<EmptyCartModal
+							trigger={
+								<Button className="flex items-center gap-4">
+									<ShoppingCart className="h-5 w-5" />
+									Carrinho vazio
+								</Button>
+							}
+						/>
+					) : (
+						<ShoppingCartModal
+							gifts={order}
+							trigger={
+								<Button className="flex items-center gap-4">
+									<ShoppingCart className="h-5 w-5" />
+									{order.length === 1
 										? `Ver carrinho (1 presente)`
 										: `Ver carrinho (${order.length} presentes)`}
-							</Button>
-						}
-					/>
+								</Button>
+							}
+						/>
+					)}
 
 					<div className="flex gap-4">
 						<label htmlFor="list-order" className="text-nowrap text-lg font-semibold">
