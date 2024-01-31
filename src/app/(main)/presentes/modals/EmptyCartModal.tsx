@@ -4,10 +4,7 @@ import Image from 'next/image';
 import React, { ReactNode } from 'react';
 import { twMerge } from 'tailwind-merge';
 import * as Dialog from '@radix-ui/react-dialog';
-import { useAutoAnimate } from '@formkit/auto-animate/react';
 
-import { IGift } from '@/data/gift-list';
-import { useStore } from '@/zustand-store';
 import { Button } from '@/components/Buttons';
 
 import { X } from 'lucide-react';

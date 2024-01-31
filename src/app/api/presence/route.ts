@@ -10,7 +10,7 @@ const bodySchema = z.object({
 	family_members_amount: z.coerce.number(),
 });
 
-export async function POST(request: NextRequest, res: NextResponse) {
+export async function POST(request: NextRequest) {
 	if (request.method !== 'POST') {
 		return new Response(null, {
 			status: 405,
