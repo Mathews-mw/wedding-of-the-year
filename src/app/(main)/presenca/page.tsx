@@ -2,27 +2,83 @@
 
 import z from 'zod';
 import Image from 'next/image';
+import { toast } from 'sonner';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm, Controller } from 'react-hook-form';
 
 import { Button } from '@/components/Buttons';
 import { Select } from '@/components/Form/Select';
+import { Spinner } from '@/components/Loaders/Spinner';
 import { SelectItem } from '@/components/Form/Select/SelectItem';
 import { InputControl, InputRoot } from '@/components/Form/Input';
+import { InputMaskControl, InputMaskRoot } from '@/components/Form/InputMask';
 
 import LetsGetMarried from '../../../../public/lets-get-married.png';
-import { InputMaskControl, InputMaskRoot } from '@/components/Form/InputMask';
+import { api } from '@/lib/axios';
+import { errorHandler } from '@/utils/error-handler';
 
 const formSchema = z.object({
 	name: z.string().min(1, { message: 'Por favor, preencha o campo.' }),
-	guests: z.string(),
+	familyMembersAmount: z
+		.string({ required_error: 'Por favor, preencha o campo.' })
+		.min(1, { message: 'Por favor, preencha o campo.' }),
 	email: z
 		.string()
 		.email({ message: 'Preencha com um e-mail válido.' })
 		.min(1, { message: 'Por favor, preencha o campo.' }),
-	phone: z.string(),
+	phone: z
+		.string()
+		.min(1, { message: 'Por favor, preencha o campo.' })
+		.transform((value) => {
+			return value.replace(/\s/g, '').replace('(', '').replace(')', '').replace('-', '');
+		}),
 });
 
+type FormData = z.infer<typeof formSchema>;
+
 export default function Presenca() {
+	const [loading, setLoading] = useState(false);
+
+	const {
+		handleSubmit,
+		register,
+		control,
+		reset,
+		formState: { errors, isSubmitting },
+	} = useForm<FormData>({
+		resolver: zodResolver(formSchema),
+	});
+
+	const router = useRouter();
+
+	async function handleConfirmationFormSubmit(data: FormData) {
+		try {
+			setLoading(true);
+
+			const { data: result } = await api.post('/presence', {
+				name: data.name,
+				email: data.email,
+				phone: data.phone,
+				family_members_amount: data.familyMembersAmount,
+			});
+
+			setLoading(false);
+			reset();
+
+			router.push(`/presenca/confirmacao?guest=${data.name}`);
+			toast.success(`${result.guest}, sua confirmação foi realizada com sucesso.`, {
+				duration: 5000,
+			});
+		} catch (error) {
+			console.log(error);
+			setLoading(false);
+			errorHandler(error);
+		}
+	}
+
 	return (
 		<div className="mt-8">
 			<div className="grid grid-cols-2 gap-8">
@@ -58,62 +114,98 @@ export default function Presenca() {
 				</motion.div>
 			</div>
 
-			<form className="mt-8 space-y-6 rounded-lg border border-slate-200 p-8 shadow-sm">
+			<form
+				onSubmit={handleSubmit(handleConfirmationFormSubmit)}
+				className="mt-8 space-y-6 rounded-lg border border-slate-200 p-8 shadow-sm"
+			>
 				<div className="flex flex-col gap-3 pt-5 lg:grid lg:grid-cols-form">
 					<label htmlFor="name" className="font-semibold">
 						Nome completo
 					</label>
 
-					<InputRoot>
-						<InputControl id="name" placeholder="Insira seu nome completo" required />
-					</InputRoot>
+					<div>
+						<InputRoot>
+							<InputControl
+								id="name"
+								placeholder="Insira seu nome completo"
+								{...register('name')}
+							/>
+						</InputRoot>
+						<small className="text-red-400">{errors.name?.message}</small>
+					</div>
 				</div>
-
 				<div className="flex flex-col gap-3 pt-5 lg:grid lg:grid-cols-form">
 					<label htmlFor="guests" className="font-semibold">
 						Quantidade de familiares
 					</label>
 
 					<div className="max-w-48">
-						<Select placeholder="Selecione um valor" required>
-							<SelectItem value="0" text="0" />
-							<SelectItem value="1" text="1" />
-							<SelectItem value="2" text="2" />
-							<SelectItem value="3" text="3" />
-							<SelectItem value="4" text="5" />
-							<SelectItem value="5" text="5" />
-							<SelectItem value="6" text="6" />
-						</Select>
+						<Controller
+							name="familyMembersAmount"
+							control={control}
+							render={({ field }) => {
+								return (
+									<Select
+										placeholder="Selecione um valor"
+										value={field.value}
+										onValueChange={field.onChange}
+									>
+										<SelectItem value="0" text="0" />
+										<SelectItem value="1" text="1" />
+										<SelectItem value="2" text="2" />
+										<SelectItem value="3" text="3" />
+										<SelectItem value="4" text="5" />
+										<SelectItem value="5" text="5" />
+										<SelectItem value="6" text="6" />
+									</Select>
+								);
+							}}
+						/>
+						<small className="text-red-400">{errors.familyMembersAmount?.message}</small>
 					</div>
 				</div>
-
 				<div className="flex flex-col gap-3 pt-5 lg:grid lg:grid-cols-form">
 					<label htmlFor="email" className="font-semibold">
 						E-mail
 					</label>
 
-					<InputRoot>
-						<InputControl id="email" placeholder="maria@email.com" required />
-					</InputRoot>
+					<div>
+						<InputRoot>
+							<InputControl id="email" placeholder="maria@email.com" {...register('email')} />
+						</InputRoot>
+						<small className="text-red-400">{errors.email?.message}</small>
+					</div>
 				</div>
-
 				<div className="flex flex-col gap-3 pt-5 lg:grid lg:grid-cols-form">
 					<label htmlFor="phone" className="font-semibold">
 						Telefone para contato
 					</label>
 
-					<InputMaskRoot>
-						<InputMaskControl
-							mask="(\92) 99999-9999"
-							maskChar=" "
-							maskPlaceholder={null}
-							id="phone"
-							placeholder="(99) 99999-9999"
-						/>
-					</InputMaskRoot>
+					<div>
+						<InputMaskRoot>
+							<InputMaskControl
+								mask="(\92) 99999-9999"
+								maskChar=" "
+								maskPlaceholder={null}
+								id="phone"
+								placeholder="(99) 99999-9999"
+								{...register('phone')}
+							/>
+						</InputMaskRoot>
+						<small className="text-red-400">{errors.phone?.message}</small>
+					</div>
 				</div>
 
-				<Button type="submit">Confirmar</Button>
+				<div className="flex w-full justify-end">
+					<Button
+						type="submit"
+						className="flex items-center justify-center gap-2"
+						disabled={isSubmitting || loading}
+					>
+						Confirmar
+						{isSubmitting && <Spinner />}
+					</Button>
+				</div>
 			</form>
 		</div>
 	);

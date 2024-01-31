@@ -10,6 +10,7 @@ export interface IStoreState {
 export const useStore = create<IStoreState>((set, get) => {
 	return {
 		order: [],
+
 		addToOrder: (gift: IGift) => {
 			const { order } = get();
 			const giftList = [gift, ...order];

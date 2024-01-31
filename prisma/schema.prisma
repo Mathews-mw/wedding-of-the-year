@@ -13,7 +13,7 @@ datasource db {
 model User {
   id       String  @id @default(uuid())
   name     String
-  email    String
+  email    String  @unique
   password String
   isAdmin  Boolean @default(false) @map("is_admin")
 
@@ -22,7 +22,7 @@ model User {
 
 model Gift {
   id          String  @id @default(uuid())
-  title       String
+  title       String  @unique
   description String
   image       String
   price       Float
@@ -33,11 +33,11 @@ model Gift {
 }
 
 model Guest {
-  id            String @id @default(uuid())
-  name          String
-  email         String
-  phone         String
-  parentsAmount Int    @map("parents_amount")
+  id                  String @id @default(uuid())
+  name                String
+  email               String @unique
+  phone               String
+  familyMembersAmount Int    @map("family_members_amount")
 
   @@map("guests")
 }

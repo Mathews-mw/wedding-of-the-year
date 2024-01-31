@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { twMerge } from 'tailwind-merge';
-import { Libre_Baskerville } from 'next/font/google';
+import { Libre_Baskerville, Caveat } from 'next/font/google';
 
 import Link from 'next/link';
 import { Button } from '@/components/Buttons';
@@ -15,6 +15,11 @@ import WeddingIllustration from '../../../../public/wedding-illustration.jpg';
 const libreBaskerville = Libre_Baskerville({
 	subsets: ['latin'],
 	weight: ['400', '700'],
+});
+
+const caveat = Caveat({
+	subsets: ['latin'],
+	weight: ['400', '500', '600', '700'],
 });
 
 export default function Home() {
@@ -57,18 +62,44 @@ export default function Home() {
 				</div>
 			</div>
 
-			<div className="rounded-lg bg-rose-50 px-4 py-8">
-				<p className="text-center">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam ea eius maiores
-					doloremque non facere nam fuga amet quae, neque beatae reprehenderit unde minima a,
-					molestiae inventore! Labore, voluptatum. Tenetur! Lorem ipsum, dolor sit amet
-					consectetur adipisicing elit. Sapiente voluptas nemo exercitationem. Natus cupiditate,
-					ratione quasi eaque officia, velit aliquid dolorum at ipsum, reprehenderit voluptate.
-					Reprehenderit deleniti et quaerat autem. Lorem ipsum dolor sit amet consectetur,
-					adipisicing elit. Earum assumenda aut eaque velit, fugit officiis. Iure fugit optio
-					delectus recusandae perferendis consequuntur veniam rerum ipsum distinctio! Aut
-					praesentium animi nam!
+			<div
+				className={twMerge([
+					'font rounded-lg bg-rose-50 px-4 py-8 text-2xl font-light',
+					caveat.className,
+				])}
+			>
+				<p className="indent-6">Queridos amigos e familiares,</p>
+
+				<br />
+
+				<p className="indent-6">
+					É com grande alegria que compartilhamos o momento especial de nossas vidas: nosso
+					casamento! Estamos ansiosos para celebrar esse dia único e mágico ao lado de cada um
+					de vocês, criando memórias que durarão para sempre.
 				</p>
+
+				<br />
+
+				<p className="indent-6">
+					Para nos ajudar a preparar este dia de maneira especial, gostaríamos de contar com a
+					sua presença. Pedimos gentilmente que confirmem a participação, para que possamos
+					organizar todos os detalhes com carinho e cuidado.
+				</p>
+
+				<br />
+
+				<p className="indent-6">
+					Se precisarem de informações adicionais ou tiverem alguma dúvida, não hesitem em
+					entrar em contato. Agradecemos desde já por fazerem parte deste capítulo importante em
+					nossas vidas.
+				</p>
+
+				<br />
+
+				<div className="flex w-full flex-col items-center justify-center">
+					<small>Acima de tudo, porém, revistam-se do amor, que é o elo perfeito.</small>
+					<small>(Colossenses 3:14)</small>
+				</div>
 			</div>
 
 			<div className="space-y-4">

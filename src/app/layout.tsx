@@ -1,10 +1,11 @@
 import './globals.css';
 import 'react-loading-skeleton/dist/skeleton.css';
 
-import { TanstackQueryClientProvider } from '@/providers/TanstackQueryClientProvider';
-
+import { Toaster } from 'sonner';
 import type { Metadata } from 'next';
 import { Nunito } from 'next/font/google';
+
+import { TanstackQueryClientProvider } from '@/providers/TanstackQueryClientProvider';
 
 const nunitoSans = Nunito({
 	subsets: ['latin'],
@@ -25,6 +26,8 @@ export default function RootLayout({
 		<html lang="pt-br" className="min-h-screen antialiased">
 			<body className={nunitoSans.className}>
 				<TanstackQueryClientProvider>{children}</TanstackQueryClientProvider>
+
+				<Toaster richColors />
 			</body>
 		</html>
 	);

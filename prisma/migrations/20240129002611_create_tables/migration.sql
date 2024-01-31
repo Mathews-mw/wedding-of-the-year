@@ -15,9 +15,9 @@ CREATE TABLE "gifts" (
     "title" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "image" TEXT NOT NULL,
-    "price" INTEGER NOT NULL,
+    "price" DOUBLE PRECISION NOT NULL,
     "amount" INTEGER NOT NULL,
-    "available" BOOLEAN NOT NULL,
+    "available" BOOLEAN NOT NULL DEFAULT true,
 
     CONSTRAINT "gifts_pkey" PRIMARY KEY ("id")
 );
@@ -28,7 +28,7 @@ CREATE TABLE "guests" (
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "phone" TEXT NOT NULL,
-    "parents_amount" INTEGER NOT NULL,
+    "family_members_amount" INTEGER NOT NULL,
 
     CONSTRAINT "guests_pkey" PRIMARY KEY ("id")
 );

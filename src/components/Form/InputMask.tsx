@@ -1,6 +1,7 @@
-import { ComponentProps } from 'react';
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { twMerge } from 'tailwind-merge';
 import InputMask, { Props as PropsMask } from 'react-input-mask';
+import { ComponentProps, ForwardRefRenderFunction, forwardRef } from 'react';
 
 type InputPrefixProps = ComponentProps<'div'>;
 type InputControlProps = PropsMask;
@@ -10,14 +11,19 @@ export function InputMaskPrefix(props: InputPrefixProps) {
 	return <div {...props} />;
 }
 
-export function InputMaskControl(props: InputControlProps) {
+const InputMaskControlBase: ForwardRefRenderFunction<HTMLInputElement, InputControlProps> = (
+	{ ...props },
+	ref
+) => {
 	return (
 		<InputMask
+			// @ts-ignore
+			ref={ref}
 			className="flex-1 border-0 bg-transparent p-0 text-slate-600 placeholder-slate-300 outline-none"
 			{...props}
 		/>
 	);
-}
+};
 
 export function InputMaskRoot(props: InputRootProps) {
 	return (
@@ -31,3 +37,5 @@ export function InputMaskRoot(props: InputRootProps) {
 		/>
 	);
 }
+
+export const InputMaskControl = forwardRef(InputMaskControlBase);

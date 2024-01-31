@@ -1,22 +1,26 @@
-import { ComponentProps } from 'react';
+import { ComponentProps, ForwardRefRenderFunction, forwardRef } from 'react';
 import { twMerge } from 'tailwind-merge';
 
-type InputPrefixProps = ComponentProps<'div'>;
-type InputControlProps = ComponentProps<'input'>;
 type InputRootProps = ComponentProps<'div'>;
+type InputControlProps = ComponentProps<'input'>;
+type InputPrefixProps = ComponentProps<'div'>;
 
 export function InputPrefix(props: InputPrefixProps) {
 	return <div {...props} />;
 }
 
-export function InputControl(props: InputControlProps) {
+const InputControlBase: ForwardRefRenderFunction<HTMLInputElement, InputControlProps> = (
+	{ ...props },
+	ref
+) => {
 	return (
 		<input
+			ref={ref}
 			className="flex-1 border-0 bg-transparent p-0 text-slate-600 placeholder-slate-300 outline-none"
 			{...props}
 		/>
 	);
-}
+};
 
 export function InputRoot(props: InputRootProps) {
 	return (
@@ -30,3 +34,5 @@ export function InputRoot(props: InputRootProps) {
 		/>
 	);
 }
+
+export const InputControl = forwardRef(InputControlBase);
