@@ -4,6 +4,10 @@ const config: Config = {
 	content: ['./src/**/*.tsx'],
 	theme: {
 		extend: {
+			screens: {
+				hiddenOnPhone: { max: '1024px' },
+			},
+
 			gridTemplateColumns: {
 				giftResumeTemplateColumns: 'repeat(3, minmax(100px, 1fr))',
 				giftListTemplateColumns: 'repeat(auto-fit, minmax(208px, 1fr))',

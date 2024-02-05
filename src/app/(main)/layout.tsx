@@ -7,7 +7,7 @@ export default function HomeLayout({ children }: { children: ReactNode }) {
 		<div className="min-h-screen w-full text-slate-600">
 			<Header />
 
-			<main className="mx-auto mb-8 flex min-h-screen max-w-[1440px] flex-col px-40">
+			<main className="flex min-h-screen flex-col lg:mx-auto lg:mb-8 lg:max-w-[1440px] lg:px-40">
 				{children}
 			</main>
 		</div>

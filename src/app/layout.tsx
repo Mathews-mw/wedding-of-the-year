@@ -1,11 +1,21 @@
 import './globals.css';
+import 'react-modern-drawer/dist/index.css';
 import 'react-loading-skeleton/dist/skeleton.css';
 
+import 'dayjs/locale/pt-br';
+import utc from 'dayjs/plugin/utc';
+import relativeTime from 'dayjs/plugin/relativeTime';
+
+import dayjs from 'dayjs';
 import { Toaster } from 'sonner';
 import type { Metadata } from 'next';
 import { Nunito } from 'next/font/google';
 
 import { TanstackQueryClientProvider } from '@/providers/TanstackQueryClientProvider';
+
+dayjs.locale('pt-br');
+dayjs.extend(utc);
+dayjs.extend(relativeTime);
 
 const nunitoSans = Nunito({
 	subsets: ['latin'],

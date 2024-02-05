@@ -117,7 +117,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		title: 'Multiprocessador',
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
-		image: 'public/multiprocessador.jpg',
+		image: '/multiprocessador.jpg',
 		price: 268.0,
 		amount: 1,
 		available: true,
@@ -186,7 +186,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		title: 'Jogo de Cama',
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
-		image: 'public/jogo-cama.jpg',
+		image: '/jogo-cama.jpg',
 		price: 189.0,
 		amount: 2,
 		available: true,

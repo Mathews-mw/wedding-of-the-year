@@ -13,10 +13,8 @@ const button = tv({
 		variant: {
 			primary: 'bg-rose-500 text-white enabled:hover:bg-rose-500/90',
 			slate: 'bg-slate-500 text-white hover:bg-slate-500/90',
-			outline:
-				'border border-zinc-300 text-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-400 dark:hover:bg-zinc-800',
-			ghost:
-				'rounded-md px-2 text-zinc-500 shadow-none hover:bg-zinc-50 dark:text-zinc-400 dark:hover:bg-white/5',
+			outline: 'border border-zinc-300 text-zinc-700 hover:bg-zinc-50',
+			ghost: 'rounded-md px-2 text-slate-500 shadow-none hover:bg-slate-50',
 		},
 	},
 

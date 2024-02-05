@@ -9,16 +9,16 @@ import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, Controller } from 'react-hook-form';
 
+import { api } from '@/lib/axios';
 import { Button } from '@/components/Buttons';
 import { Select } from '@/components/Form/Select';
+import { errorHandler } from '@/utils/error-handler';
 import { Spinner } from '@/components/Loaders/Spinner';
 import { SelectItem } from '@/components/Form/Select/SelectItem';
 import { InputControl, InputRoot } from '@/components/Form/Input';
 import { InputMaskControl, InputMaskRoot } from '@/components/Form/InputMask';
 
 import LetsGetMarried from '../../../../public/lets-get-married.png';
-import { api } from '@/lib/axios';
-import { errorHandler } from '@/utils/error-handler';
 
 const formSchema = z.object({
 	name: z.string().min(1, { message: 'Por favor, preencha o campo.' }),

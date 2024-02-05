@@ -1,12 +1,33 @@
+'use client';
+
+import { useState } from 'react';
+
+import { Logo } from '../Logo';
+import { Button } from '../Buttons';
+import { Menu } from 'lucide-react';
 import { NavLink } from '../NavLink';
-import { Logo } from './Logo';
+import { NavDrawer } from '../NavDrawer';
 
 export function Header() {
-	return (
-		<header className="sticky left-0 top-0 z-30 w-full bg-white/90 p-4 shadow-sm">
-			<div className="mx-auto flex max-w-[1440px] items-center justify-between px-40">
-				<Logo />
+	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
+	return (
+		<header className="sticky left-0 top-0 z-30 w-full bg-white/90 p-2 shadow-sm lg:p-4">
+			<div className="flex max-w-[1440px] items-center justify-between lg:mx-auto lg:px-40">
+				<Logo className="hiddenOnPhone:hidden" />
+
+				<Button
+					variant="ghost"
+					className="lg:hidden"
+					onClick={() => setIsDrawerOpen(!isDrawerOpen)}
+				>
+					<Menu />
+				</Button>
+
+				<NavDrawer
+					isDrawerOpen={isDrawerOpen}
+					toggleDrawer={() => setIsDrawerOpen(!isDrawerOpen)}
+				/>
 				<NavLink />
 			</div>
 		</header>

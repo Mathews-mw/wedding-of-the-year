@@ -29,6 +29,8 @@ model Gift {
   amount      Int
   available   Boolean @default(true)
 
+  orderProducts OrderProducts[]
+
   @@map("gifts")
 }
 
@@ -40,4 +42,39 @@ model Guest {
   familyMembersAmount Int    @map("family_members_amount")
 
   @@map("guests")
+}
+
+model Order {
+  id            String @id @default(uuid())
+  customerName  String @map("customer_name") //Resposta da API do PagSeguro
+  customerEmail String @map("customer_email") //Resposta da API do PagSeguro
+  customerCpf   String @map("customer_cpf") //Resposta da API do PagSeguro
+  checkoutId    String @map("checkout_id") //Resposta da API do PagSeguro 
+  referenceId   String @map("reference_id") //Resposta da API do PagSeguro
+
+  orderProducts OrderProducts[]
+
+  @@map("orders")
+}
+
+model OrderProducts {
+  id              String @id @default(uuid())
+  itemReferenceId String @map("item_reference_id") //Resposta da API do PagSeguro
+  itemName        String @map("item_name") //Resposta da API do PagSeguro
+  itemQuantity    String @map("item_quantity") //Resposta da API do PagSeguro
+  giftId          String @map("gift_id")
+  orderId         String @map("order_id")
+
+  gift  Gift  @relation(fields: [giftId], references: [id], onUpdate: Cascade)
+  order Order @relation(fields: [orderId], references: [id], onUpdate: Cascade)
+
+  @@map("order_products")
+}
+
+model Message {
+  id          String @id @default(uuid())
+  from        String
+  messageText String
+
+  @@map("messages")
 }

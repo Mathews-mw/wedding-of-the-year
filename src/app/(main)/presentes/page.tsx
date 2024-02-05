@@ -22,8 +22,6 @@ import WeddingGifts from '../../../../public/wedding-gifts.png';
 export default function PresentesPage() {
 	const [sortListValue, setSortListValue] = useState('asc');
 
-	console.log(sortListValue);
-
 	const { order } = useStore((store) => {
 		return {
 			order: store.order,

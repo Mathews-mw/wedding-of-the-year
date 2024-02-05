@@ -1,21 +1,15 @@
-'use client';
-
-import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { twMerge } from 'tailwind-merge';
-import { Libre_Baskerville, Caveat } from 'next/font/google';
+/* eslint-disable @next/next/no-img-element */
 
 import Link from 'next/link';
-import { Button } from '@/components/Buttons';
+import Image from 'next/image';
+import { twMerge } from 'tailwind-merge';
+import { Caveat } from 'next/font/google';
+
+import { ImageHeader } from './ImageHeader';
 import { giftList } from '@/data/gift-list';
+import { Button } from '@/components/Buttons';
 
 import { Camera, Church, Clock5, Gift, MapPin, PartyPopper } from 'lucide-react';
-import WeddingIllustration from '../../../../public/wedding-illustration.jpg';
-
-const libreBaskerville = Libre_Baskerville({
-	subsets: ['latin'],
-	weight: ['400', '700'],
-});
 
 const caveat = Caveat({
 	subsets: ['latin'],
@@ -27,44 +21,11 @@ export default function Home() {
 
 	return (
 		<div className="h-full space-y-6">
-			<div className="relative h-[520px] w-full">
-				<motion.div
-					animate={{ opacity: 1, x: 0 }}
-					initial={{ opacity: 0, x: -100 }}
-					transition={{ duration: 1, ease: 'easeIn', type: 'spring' }}
-				>
-					<Image
-						src={WeddingIllustration}
-						width={1440}
-						height={520}
-						quality={100}
-						alt="wedding illustration"
-						className="absolute left-0 top-0 -z-10 h-[520px] object-cover object-top"
-					/>
-				</motion.div>
-
-				<div
-					className={twMerge([
-						libreBaskerville.className,
-						'flex h-full w-full items-center justify-end text-slate-100',
-					])}
-				>
-					<motion.div
-						animate={{ opacity: 1, x: 0 }}
-						initial={{ opacity: 0, x: 150 }}
-						transition={{ duration: 1, ease: 'easeIn', type: 'spring' }}
-						className="flex h-full w-[50%] flex-col items-center justify-center space-y-2 pr-40 text-rose-400"
-					>
-						<span className="text-xl font-light">Naíla & Rodrigo</span>
-						<div className="h-0.5 w-56 bg-gradient-to-r from-rose-200 via-rose-400 to-rose-200 shadow-sm" />
-						<span className="text-lg">18 DE MAIO DE 2024</span>
-					</motion.div>
-				</div>
-			</div>
+			<ImageHeader />
 
 			<div
 				className={twMerge([
-					'font rounded-lg bg-rose-50 px-4 py-8 text-2xl font-light',
+					'font bg-rose-50 px-4 py-8 text-2xl font-light lg:rounded-lg',
 					caveat.className,
 				])}
 			>
@@ -102,36 +63,40 @@ export default function Home() {
 				</div>
 			</div>
 
-			<div className="space-y-4">
-				<a id="recepcao" className="hidden"></a>
-
+			<div className="hiddenOnPhone:p-4 space-y-4">
 				<div className="flex items-start space-x-3">
 					<Church className="h-6 w-6" />
 					<span className="text-xl font-semibold">Recepção</span>
 				</div>
 
-				<div className="grid grid-cols-2">
-					<div className="flex flex-col space-y-4">
-						<p>
+				<div className="lg:grid lg:grid-cols-2">
+					<div className="flex flex-col gap-4">
+						<p className="text-wrap">
 							O local do evento será no <strong>Bella Flora</strong>. Localizado na rua Sergipe,
 							número 47, Parque das Laranjeiras - CEP: 69058530.
 						</p>
 
 						<div className="flex flex-col gap-2">
-							<span className="flex gap-2 text-sm">
+							<div className="flex gap-2 text-sm">
 								<Clock5 className="h-4 w-4" />
-								Começará às <strong>17hrs</strong>. Chegue com 40 minutos de antecedência.
-							</span>
+								<p>
+									Começará às <strong>17hrs</strong>. Chegue com 40 minutos de antecedência.
+								</p>
+							</div>
 
-							<span className="flex gap-2 text-sm">
+							<div className="flex gap-2 text-sm">
 								<Camera className="h-4 w-4" />
-								Ajude-nos a <strong>eternizar</strong> esse dia tirando muitas fotos.
-							</span>
+								<p>
+									Ajude-nos a <strong>eternizar</strong> esse dia tirando muitas fotos.
+								</p>
+							</div>
 
-							<span className="flex gap-2 text-sm">
+							<div className="flex gap-2 text-sm">
 								<PartyPopper className="h-4 w-4" />
-								<strong>Divirta-se</strong> muito!
-							</span>
+								<p>
+									<strong>Divirta-se</strong> muito!
+								</p>
+							</div>
 						</div>
 
 						<Link
@@ -144,7 +109,7 @@ export default function Home() {
 						</Link>
 					</div>
 
-					<div className="flex justify-around">
+					<div className="hiddenOnPhone:hidden flex justify-around">
 						<Image
 							src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 							width={220}
@@ -165,27 +130,30 @@ export default function Home() {
 				</div>
 			</div>
 
-			<div className="space-y-4">
+			<div className="hiddenOnPhone:bg-rose-50 hiddenOnPhone:p-4 space-y-4">
 				<div className="flex items-start space-x-3">
 					<Gift className="h-6 w-6" />
 					<span className="text-xl font-semibold">Lista de presentes</span>
 				</div>
 
-				<div className="grid grid-cols-2">
+				<div className="lg:grid lg:grid-cols-2">
 					<div className="flex flex-col gap-4">
 						<span>Que tal dá uma olhada na nossa lista de presentes?</span>
 
-						<div>
-							<Button>Conferir lista de presentes</Button>
+						<div className="flex w-full justify-center lg:justify-start">
+							<Button>
+								<Link href="/presentes">Conferir lista de presentes</Link>
+							</Button>
 						</div>
 					</div>
 
-					<div className="grid grid-cols-giftResumeTemplateColumns grid-rows-giftResumeTemplateRows gap-4">
+					<div className="hiddenOnPhone:hidden grid grid-cols-giftResumeTemplateColumns grid-rows-giftResumeTemplateRows gap-4">
 						{resumeGiftList.map((gift) => {
 							return (
 								<div key={gift.id} className="">
 									<img
 										src={gift.image}
+										alt={gift.title}
 										className="h-full w-full rounded object-cover shadow-sm"
 									/>
 								</div>
