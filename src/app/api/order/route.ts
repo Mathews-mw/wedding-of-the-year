@@ -83,8 +83,8 @@ export async function POST(request: NextRequest) {
 			],
 			soft_descriptor: 'Casamento Rod&Nai',
 			redirect_url: 'https://wedding-of-the-year.vercel.app/pedido/confirmacao',
-			return_url: 'http://www.localhost:3000/pedido',
-			notification_urls: ['http://www.localhost:3000/order/notification'],
+			return_url: 'https://wedding-of-the-year.vercel.app/pedido',
+			notification_urls: ['https://wedding-of-the-year.vercel.app/api/order/notification'],
 		});
 
 		console.log('pagSeguroResult: ', pagSeguroResult);
@@ -95,6 +95,8 @@ export async function POST(request: NextRequest) {
 				referenceId: pagSeguroResult.reference_id,
 			},
 		});
+
+		console.log('order: ', order);
 
 		const orderProducts: Prisma.OrderProductsCreateManyInput = pagSeguroResult.items.map(
 			(item: IPagSeguroItem) => {
@@ -132,9 +134,12 @@ export async function POST(request: NextRequest) {
 			payment_link: paymentLink.href,
 		});
 	} catch (error) {
+		console.log('order route error: ', error);
+
 		if (error instanceof AxiosError) {
-			console.log('order route error: ', error.response?.data);
+			console.log('order route axios error: ', error.response?.data);
 		}
+
 		return new Response('Erro ao tentar criar pedido.', {
 			status: 400,
 		});

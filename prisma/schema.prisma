@@ -61,7 +61,7 @@ model OrderProducts {
   id              String @id @default(uuid())
   itemReferenceId String @map("item_reference_id") //Resposta da API do PagSeguro
   itemName        String @map("item_name") //Resposta da API do PagSeguro
-  itemQuantity    String @map("item_quantity") //Resposta da API do PagSeguro
+  itemQuantity    Int    @map("item_quantity") //Resposta da API do PagSeguro
   giftId          String @map("gift_id")
   orderId         String @map("order_id")
 
