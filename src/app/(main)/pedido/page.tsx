@@ -1,12 +1,37 @@
 'use client';
 
 import { useStore } from '@/zustand-store';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import { Button } from '@/components/Buttons';
 import { Textarea } from '@/components/Form/Textarea';
 import { InputControl, InputRoot } from '@/components/Form/Input';
+import { z } from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useState } from 'react';
+import { api } from '@/lib/axios';
+import { errorHandler } from '@/utils/error-handler';
+import { Spinner } from '@/components/Loaders/Spinner';
+
+const formSchema = z.object({
+	name: z.optional(z.string()),
+	message: z.optional(z.string()),
+});
+
+type FormData = z.infer<typeof formSchema>;
 
 export default function OrderPage() {
+	const [loading, setLoading] = useState(false);
+
+	const {
+		handleSubmit,
+		register,
+		reset,
+		formState: { errors, isSubmitting },
+	} = useForm<FormData>({
+		resolver: zodResolver(formSchema),
+	});
+
 	const router = useRouter();
 
 	const { order } = useStore((store) => {
@@ -23,8 +48,33 @@ export default function OrderPage() {
 		currency: 'BRL',
 	});
 
+	async function handleCheckoutFormSubmit(data: FormData) {
+		console.log(data);
+		try {
+			setLoading(true);
+
+			const giftsIds = order.map((gift) => gift.id);
+
+			const { data: result } = await api.post('/order', {
+				giftsIds,
+				name: data.name,
+				message: data.message,
+			});
+
+			reset();
+
+			console.log(result);
+			router.push(result.payment_link);
+			setLoading(false);
+		} catch (error) {
+			console.log(error);
+			setLoading(false);
+			errorHandler(error);
+		}
+	}
+
 	return (
-		<div className="mt-8 space-y-8">
+		<div className="mt-8 space-y-8 hiddenOnPhone:px-4">
 			<h3 className="text-2xl font-semibold">Resumo da sua compra</h3>
 
 			<div className="flex w-full flex-col">
@@ -54,7 +104,10 @@ export default function OrderPage() {
 				</div>
 			</div>
 
-			<div className="space-y-5">
+			<form
+				onSubmit={handleSubmit(handleCheckoutFormSubmit)}
+				className="mt-auto h-full space-y-5"
+			>
 				<h5 className="text-lg font-semibold">Gostaria de deixar uma mensagem de carinho?</h5>
 
 				<div className="space-y-5">
@@ -63,7 +116,7 @@ export default function OrderPage() {
 							Insira seu nome
 						</label>
 						<InputRoot>
-							<InputControl id="name" placeholder="Nome completo" />
+							<InputControl id="name" placeholder="Nome completo" {...register('name')} />
 						</InputRoot>
 					</div>
 
@@ -74,17 +127,31 @@ export default function OrderPage() {
 						<Textarea
 							id="message"
 							placeholder="Fique a vontade para deixar sua mensagem de carinho para o casal..."
+							{...register('message')}
 						/>
 					</div>
 				</div>
 
-				<div className="flex w-full justify-end gap-4">
-					<Button variant="slate" onClick={() => router.push('/presentes')}>
+				<div className="flex w-full flex-col justify-end gap-4 lg:flex-row">
+					<Button
+						type="button"
+						variant="slate"
+						onClick={() => router.push('/presentes')}
+						disabled={loading || isSubmitting}
+					>
 						Voltar para o carrinho
 					</Button>
-					<Button>Finalizar compra</Button>
+
+					<Button
+						type="submit"
+						className="flex items-center justify-center gap-2"
+						disabled={loading || isSubmitting}
+					>
+						Finalizar compra
+						{loading && <Spinner />}
+					</Button>
 				</div>
-			</div>
+			</form>
 		</div>
 	);
 }

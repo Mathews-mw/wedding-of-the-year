@@ -81,16 +81,16 @@ export default function Presenca() {
 
 	return (
 		<div className="mt-8">
-			<div className="grid grid-cols-2 gap-8">
+			<div className="lg:grid lg:grid-cols-2 lg:gap-8 hiddenOnPhone:space-y-4">
 				<div>
 					<motion.div
 						animate={{ opacity: 1, x: 0 }}
 						initial={{ opacity: 0, x: -100 }}
 						transition={{ duration: 1, ease: 'easeIn', type: 'spring' }}
 					>
-						<h3 className="text-2xl font-semibold">Confirme sua presença</h3>
+						<h3 className="text-2xl font-semibold hiddenOnPhone:px-2">Confirme sua presença</h3>
 
-						<p className="mt-4 text-justify">
+						<p className="mt-4 text-justify hiddenOnPhone:px-2">
 							Chegou a hora de você confirmar sua presença nesse evento especial. Por favor,
 							preencha todos os campos a baixo, informando a quantidade de familiares que irão
 							lhe acompanhar, caso seja necessário, e não esqueça de colocar um e-mail válido
@@ -109,14 +109,14 @@ export default function Presenca() {
 						src={LetsGetMarried}
 						quality={100}
 						alt=""
-						className="h-96 rounded-lg object-cover drop-shadow-lg"
+						className="h-72 object-cover drop-shadow-lg lg:h-96 lg:rounded-lg"
 					/>
 				</motion.div>
 			</div>
 
 			<form
 				onSubmit={handleSubmit(handleConfirmationFormSubmit)}
-				className="mt-8 space-y-6 rounded-lg border border-slate-200 p-8 shadow-sm"
+				className="mt-8 space-y-6 rounded-lg border border-slate-200 p-8 shadow-sm hiddenOnPhone:mx-2 hiddenOnPhone:mb-4 hiddenOnPhone:p-4"
 			>
 				<div className="flex flex-col gap-3 pt-5 lg:grid lg:grid-cols-form">
 					<label htmlFor="name" className="font-semibold">
@@ -171,7 +171,12 @@ export default function Presenca() {
 
 					<div>
 						<InputRoot>
-							<InputControl id="email" placeholder="maria@email.com" {...register('email')} />
+							<InputControl
+								id="email"
+								type="email"
+								placeholder="maria@email.com"
+								{...register('email')}
+							/>
 						</InputRoot>
 						<small className="text-red-400">{errors.email?.message}</small>
 					</div>
@@ -196,10 +201,10 @@ export default function Presenca() {
 					</div>
 				</div>
 
-				<div className="flex w-full justify-end">
+				<div className="flex w-full lg:justify-end">
 					<Button
 						type="submit"
-						className="flex items-center justify-center gap-2"
+						className="hiddenOnPhone::w-full flex items-center justify-center gap-2"
 						disabled={isSubmitting || loading}
 					>
 						Confirmar

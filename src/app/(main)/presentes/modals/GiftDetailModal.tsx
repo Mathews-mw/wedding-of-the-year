@@ -44,14 +44,14 @@ export function GiftDetailModal({ trigger, gift }: IModalProps) {
 							quality={100}
 							width={320}
 							height={320}
-							className="max-h-[480px] max-w-80 rounded-lg object-cover"
+							className="max-h-80 max-w-80 rounded-lg object-cover lg:max-h-[480px]"
 						/>
 
 						<p className="text-justify">{gift.description}</p>
 					</div>
 
-					<div className="mt-[25px] flex w-full items-center justify-between">
-						<div className="flex w-full items-start gap-2 text-slate-500">
+					<div className="mt-[25px] flex w-full flex-col items-center justify-center gap-4 lg:flex-row lg:justify-between">
+						<div className="flex w-full items-start gap-2 text-slate-500 hiddenOnPhone:justify-center">
 							<span>Valor do presente: </span>
 							<strong>
 								{gift.price.toLocaleString('pt-BR', {

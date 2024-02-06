@@ -45,7 +45,7 @@ export function ShoppingCartModal({ trigger, gifts }: IModalProps) {
 				<Dialog.Overlay className="fixed inset-0 z-40 bg-zinc-900/50 data-[state=open]:animate-overlayShow" />
 				<Dialog.Content
 					className={twMerge([
-						'fixed left-[50%] top-[50%] z-50 max-h-[85vh] w-full max-w-[40vw] translate-x-[-50%] translate-y-[-50%]',
+						'fixed left-[50%] top-[50%] z-50 max-h-[85vh] w-full max-w-[90vw] translate-x-[-50%] translate-y-[-50%] lg:max-w-[40vw]',
 						'overflow-y-auto rounded-[6px] bg-white p-[25px] shadow-sm',
 						'focus:outline-none data-[state=open]:animate-contentShow',
 					])}
@@ -67,19 +67,19 @@ export function ShoppingCartModal({ trigger, gifts }: IModalProps) {
 							return (
 								<div key={gift.id} className="grid grid-cols-3 pt-4">
 									<div className="col-span-2 flex gap-4">
-										<div className="rounded-lg border border-slate-300 p-1 shadow-sm">
+										<div className="h-16 w-16 overflow-hidden rounded-lg shadow-sm lg:h-20 lg:w-20">
 											<Image
 												src={gift.image}
 												alt=""
 												width={80}
 												height={80}
 												quality={100}
-												className="h-20 w-20 rounded-lg object-cover"
+												className="h-full w-full rounded-lg object-cover"
 											/>
 										</div>
 
 										<div className="flex flex-col items-start gap-4">
-											<span className="text-lg">{gift.title}</span>
+											<span className="text-wrap text-lg">{gift.title}</span>
 
 											<button
 												onClick={() => removeToOrder(gift)}
@@ -106,13 +106,13 @@ export function ShoppingCartModal({ trigger, gifts }: IModalProps) {
 						</div>
 					</div>
 
-					<div className="mt-[25px] flex w-full items-center justify-end gap-4">
-						<Dialog.Close asChild className="">
+					<div className="mt-[25px] flex w-full flex-col items-center gap-4 lg:flex-row lg:justify-end">
+						<Dialog.Close asChild className="hiddenOnPhone:w-full">
 							<Button variant="slate">Adicionar mais itens</Button>
 						</Dialog.Close>
 
 						{gifts.length > 0 && (
-							<Dialog.Close asChild className="">
+							<Dialog.Close asChild className="hiddenOnPhone:w-full">
 								<Button onClick={() => router.push('/pedido')}>Finalizar comprar</Button>
 							</Dialog.Close>
 						)}

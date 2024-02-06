@@ -45,12 +45,12 @@ model Guest {
 }
 
 model Order {
-  id            String @id @default(uuid())
-  customerName  String @map("customer_name") //Resposta da API do PagSeguro
-  customerEmail String @map("customer_email") //Resposta da API do PagSeguro
-  customerCpf   String @map("customer_cpf") //Resposta da API do PagSeguro
-  checkoutId    String @map("checkout_id") //Resposta da API do PagSeguro 
-  referenceId   String @map("reference_id") //Resposta da API do PagSeguro
+  id            String  @id @default(uuid())
+  customerName  String? @map("customer_name") //Resposta da API do PagSeguro
+  customerEmail String? @map("customer_email") //Resposta da API do PagSeguro
+  customerCpf   String? @map("customer_cpf") //Resposta da API do PagSeguro
+  checkoutId    String  @map("checkout_id") //Resposta da API do PagSeguro 
+  referenceId   String  @map("reference_id") //Resposta da API do PagSeguro
 
   orderProducts OrderProducts[]
 

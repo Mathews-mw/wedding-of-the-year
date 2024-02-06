@@ -22,7 +22,7 @@ export function EmptyCartModal({ trigger }: IModalProps) {
 				<Dialog.Overlay className="fixed inset-0 z-40 bg-zinc-900/50 data-[state=open]:animate-overlayShow" />
 				<Dialog.Content
 					className={twMerge([
-						'fixed left-[50%] top-[50%] z-50 max-h-[85vh] max-w-[40vw] translate-x-[-50%] translate-y-[-50%]',
+						'fixed left-[50%] top-[50%] z-50 max-h-[85vh] w-max max-w-[90vw] translate-x-[-50%] translate-y-[-50%] lg:max-w-[40vw]',
 						'overflow-y-auto rounded-[6px] bg-white p-[25px] shadow-sm',
 						'focus:outline-none data-[state=open]:animate-contentShow',
 					])}

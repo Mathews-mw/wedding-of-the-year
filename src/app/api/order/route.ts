@@ -6,6 +6,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
 import { pagseguroAPI } from '@/lib/pagseguro/pagseguro-api';
+import { AxiosError } from 'axios';
 
 interface IPagSeguroItem {
 	reference_id: string;
@@ -35,6 +36,8 @@ export async function POST(request: NextRequest) {
 	const data = await request.json();
 
 	const { giftsIds, name, message } = bodySchema.parse(data);
+
+	console.log(data);
 
 	try {
 		const gifts = await prisma.gift.findMany({
@@ -79,16 +82,15 @@ export async function POST(request: NextRequest) {
 				},
 			],
 			soft_descriptor: 'Casamento Rod&Nai',
-			redirect_url: 'http://localhost:3000/pedido/confirmacao',
-			return_url: 'http://localhost:3000/pedido/presentes',
-			// notification_urls: ['https://pagseguro.uol.com.br'],
+			redirect_url: 'https://wedding-of-the-year.vercel.app/pedido/confirmacao',
+			return_url: 'http://www.localhost:3000/pedido',
+			notification_urls: ['http://www.localhost:3000/order/notification'],
 		});
+
+		console.log('pagSeguroResult: ', pagSeguroResult);
 
 		const order = await prisma.order.create({
 			data: {
-				customerName: pagSeguroResult.customer.name,
-				customerEmail: pagSeguroResult.customer.email,
-				customerCpf: pagSeguroResult.customer.tax_id,
 				checkoutId: pagSeguroResult.id,
 				referenceId: pagSeguroResult.reference_id,
 			},
@@ -130,7 +132,9 @@ export async function POST(request: NextRequest) {
 			payment_link: paymentLink.href,
 		});
 	} catch (error) {
-		console.log('order route error: ', error);
+		if (error instanceof AxiosError) {
+			console.log('order route error: ', error.response?.data);
+		}
 		return new Response('Erro ao tentar criar pedido.', {
 			status: 400,
 		});
