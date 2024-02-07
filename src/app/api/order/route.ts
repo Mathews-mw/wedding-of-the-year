@@ -1,12 +1,13 @@
 import { z } from 'zod';
 import dayjs from 'dayjs';
+import { AxiosError } from 'axios';
 import { randomUUID } from 'node:crypto';
 import { NextRequest, NextResponse } from 'next/server';
 
 import { prisma } from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
 import { pagseguroAPI } from '@/lib/pagseguro/pagseguro-api';
-import { AxiosError } from 'axios';
+import { env } from '@/env';
 
 interface IPagSeguroItem {
 	reference_id: string;
@@ -82,9 +83,9 @@ export async function POST(request: NextRequest) {
 				},
 			],
 			soft_descriptor: 'Casamento Rod&Nai',
-			redirect_url: 'https://wedding-of-the-year.vercel.app/pedido/confirmacao',
-			return_url: 'https://wedding-of-the-year.vercel.app/pedido',
-			notification_urls: ['https://wedding-of-the-year.vercel.app/api/order/notification'],
+			redirect_url: env.PAGSEGURO_REDIRECT_URL,
+			return_url: env.PAGSEGURO_RETURN_URL,
+			notification_urls: [env.PAGSEGURO_NOTIFICATIONS_URL],
 		});
 
 		console.log('pagSeguroResult: ', pagSeguroResult);
@@ -93,6 +94,7 @@ export async function POST(request: NextRequest) {
 			data: {
 				checkoutId: pagSeguroResult.id,
 				referenceId: pagSeguroResult.reference_id,
+				status: 'ACTIVE',
 			},
 		});
 

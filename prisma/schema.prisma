@@ -35,22 +35,25 @@ model Gift {
 }
 
 model Guest {
-  id                  String @id @default(uuid())
+  id                  String   @id @default(uuid())
   name                String
-  email               String @unique
+  email               String   @unique
   phone               String
-  familyMembersAmount Int    @map("family_members_amount")
+  familyMembersAmount Int      @map("family_members_amount")
+  created_at          DateTime @default(now())
 
   @@map("guests")
 }
 
 model Order {
-  id            String  @id @default(uuid())
-  customerName  String? @map("customer_name") //Resposta da API do PagSeguro
-  customerEmail String? @map("customer_email") //Resposta da API do PagSeguro
-  customerCpf   String? @map("customer_cpf") //Resposta da API do PagSeguro
-  checkoutId    String  @map("checkout_id") //Resposta da API do PagSeguro 
-  referenceId   String  @map("reference_id") //Resposta da API do PagSeguro
+  id            String   @id @default(uuid())
+  customerName  String?  @map("customer_name") //Resposta da API do PagSeguro
+  customerEmail String?  @map("customer_email") //Resposta da API do PagSeguro
+  customerCpf   String?  @map("customer_cpf") //Resposta da API do PagSeguro
+  checkoutId    String   @map("checkout_id") //Resposta da API do PagSeguro 
+  referenceId   String   @unique @map("reference_id") //Resposta da API do PagSeguro
+  status        String?
+  created_at    DateTime @default(now())
 
   orderProducts OrderProducts[]
 
@@ -72,9 +75,10 @@ model OrderProducts {
 }
 
 model Message {
-  id          String @id @default(uuid())
+  id          String   @id @default(uuid())
   from        String
   messageText String
+  created_at  DateTime @default(now())
 
   @@map("messages")
 }
