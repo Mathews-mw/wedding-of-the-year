@@ -33,10 +33,16 @@ export function GiftList({ gifts }: IGiftListProps) {
 						whileHover={{ scale: 1.03 }}
 						transition={{ type: 'spring', stiffness: 400, damping: 10 }}
 						className={twMerge([
-							'flex flex-col items-center justify-center space-y-2 rounded-lg border border-slate-200 p-4 shadow-sm',
+							'flex flex-col items-center justify-center space-y-2 rounded-lg border border-slate-200 px-4 pb-4 pt-1 shadow-sm',
 							`${gift.available ? 'opacity-100' : 'opacity-50'}`,
 						])}
 					>
+						{gift.amount > 0 && (
+							<div className="flex w-full justify-end">
+								<span className="text-[10px] font-bold">{gift.amount} UN</span>
+							</div>
+						)}
+
 						<Image
 							src={gift.image}
 							quality={100}
@@ -73,7 +79,7 @@ export function GiftList({ gifts }: IGiftListProps) {
 						) : (
 							<div className="flex items-center justify-center gap-2 text-rose-400">
 								<HandHeart className="h-5 w-5" />
-								<span>Comprado</span>
+								<span>Esgotado</span>
 							</div>
 						)}
 					</motion.div>

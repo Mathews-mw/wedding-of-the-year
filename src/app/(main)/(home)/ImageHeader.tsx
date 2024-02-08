@@ -42,9 +42,9 @@ export function ImageHeader() {
 					transition={{ duration: 1, ease: 'easeIn', type: 'spring' }}
 					className="flex w-[50%] flex-col items-center space-y-2 pr-10 text-rose-400 lg:pr-40"
 				>
-					<span className="text-nowrap font-light lg:text-xl">Naíla & Rodrigo</span>
-					<div className="h-px  w-44 bg-gradient-to-r from-rose-200 via-rose-400 to-rose-200 shadow-sm lg:w-56" />
-					<span className="text-nowrap text-sm lg:text-lg">18 DE MAIO DE 2024</span>
+					<span className="text-nowrap text-sm font-light lg:text-xl">Naíla & Rodrigo</span>
+					<div className="h-px  w-40 bg-gradient-to-r from-rose-200 via-rose-400 to-rose-200 shadow-sm lg:w-56" />
+					<span className="text-nowrap text-xs lg:text-lg">18 DE MAIO DE 2024</span>
 				</motion.div>
 			</div>
 		</div>

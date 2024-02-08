@@ -347,7 +347,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 	{
 		title: 'Só pra não dizer que não dei nada',
 		description:
-			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
+			'Apreciamos toda forma de contribuição. Ficaremos muito gratos com a aquisição do vale presente.',
 		image: 'https://images.unsplash.com/photo-1526614180703-827d23e7c8f2',
 		price: 50.0,
 		amount: 2,

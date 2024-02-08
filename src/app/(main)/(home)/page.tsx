@@ -63,7 +63,7 @@ export default function Home() {
 				</div>
 			</div>
 
-			<div className="hiddenOnPhone:p-4 space-y-4">
+			<div className="space-y-4 hiddenOnPhone:p-4">
 				<div className="flex items-start space-x-3">
 					<Church className="h-6 w-6" />
 					<span className="text-xl font-semibold">Recepção</span>
@@ -109,7 +109,7 @@ export default function Home() {
 						</Link>
 					</div>
 
-					<div className="hiddenOnPhone:hidden flex justify-around">
+					<div className="flex justify-around hiddenOnPhone:hidden">
 						<Image
 							src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 							width={220}
@@ -130,7 +130,7 @@ export default function Home() {
 				</div>
 			</div>
 
-			<div className="hiddenOnPhone:bg-rose-50 hiddenOnPhone:p-4 space-y-4">
+			<div className="space-y-4 hiddenOnPhone:bg-rose-50 hiddenOnPhone:p-4">
 				<div className="flex items-start space-x-3">
 					<Gift className="h-6 w-6" />
 					<span className="text-xl font-semibold">Lista de presentes</span>
@@ -147,7 +147,7 @@ export default function Home() {
 						</div>
 					</div>
 
-					<div className="hiddenOnPhone:hidden grid grid-cols-giftResumeTemplateColumns grid-rows-giftResumeTemplateRows gap-4">
+					<div className="grid grid-cols-giftResumeTemplateColumns grid-rows-giftResumeTemplateRows gap-4 hiddenOnPhone:hidden">
 						{resumeGiftList.map((gift) => {
 							return (
 								<div key={gift.id} className="">
