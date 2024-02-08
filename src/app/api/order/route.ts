@@ -63,6 +63,10 @@ export async function POST(request: NextRequest) {
 		const expirationDate = dayjs().add(1, 'day');
 		console.log('expirationDate: ', expirationDate);
 
+		console.log(env.PAGSEGURO_REDIRECT_URL);
+		console.log(env.PAGSEGURO_RETURN_URL);
+		console.log(env.PAGSEGURO_NOTIFICATIONS_URL);
+
 		const { data: pagSeguroResult } = await pagseguroAPI.post('/checkouts', {
 			reference_id: randomUUID(),
 			expiration_date: expirationDate.toDate(),
@@ -86,6 +90,7 @@ export async function POST(request: NextRequest) {
 			redirect_url: env.PAGSEGURO_REDIRECT_URL,
 			return_url: env.PAGSEGURO_RETURN_URL,
 			notification_urls: [env.PAGSEGURO_NOTIFICATIONS_URL],
+			payment_notification_urls: [env.PAGSEGURO_NOTIFICATIONS_URL],
 		});
 
 		console.log('pagSeguroResult: ', pagSeguroResult);
