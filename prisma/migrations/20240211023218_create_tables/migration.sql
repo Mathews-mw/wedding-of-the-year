@@ -70,6 +70,26 @@ CREATE TABLE "messages" (
     CONSTRAINT "messages_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "wishlist_owner" (
+    "id" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3),
+
+    CONSTRAINT "wishlist_owner_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "wishlist_gifts" (
+    "id" TEXT NOT NULL,
+    "wishlist_owner_id" TEXT NOT NULL,
+    "gift_id" TEXT NOT NULL,
+
+    CONSTRAINT "wishlist_gifts_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 
@@ -82,8 +102,17 @@ CREATE UNIQUE INDEX "guests_email_key" ON "guests"("email");
 -- CreateIndex
 CREATE UNIQUE INDEX "orders_reference_id_key" ON "orders"("reference_id");
 
+-- CreateIndex
+CREATE UNIQUE INDEX "wishlist_owner_email_key" ON "wishlist_owner"("email");
+
 -- AddForeignKey
 ALTER TABLE "order_products" ADD CONSTRAINT "order_products_gift_id_fkey" FOREIGN KEY ("gift_id") REFERENCES "gifts"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "order_products" ADD CONSTRAINT "order_products_order_id_fkey" FOREIGN KEY ("order_id") REFERENCES "orders"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "wishlist_gifts" ADD CONSTRAINT "wishlist_gifts_gift_id_fkey" FOREIGN KEY ("gift_id") REFERENCES "gifts"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "wishlist_gifts" ADD CONSTRAINT "wishlist_gifts_wishlist_owner_id_fkey" FOREIGN KEY ("wishlist_owner_id") REFERENCES "wishlist_owner"("id") ON DELETE CASCADE ON UPDATE CASCADE;

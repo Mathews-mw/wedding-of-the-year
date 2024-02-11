@@ -30,6 +30,7 @@ model Gift {
   available   Boolean @default(true)
 
   orderProducts OrderProducts[]
+  wishlistGifts WishlistGifts[]
 
   @@map("gifts")
 }
@@ -81,4 +82,27 @@ model Message {
   created_at  DateTime @default(now())
 
   @@map("messages")
+}
+
+model WishlistOwner {
+  id        String    @id @default(uuid())
+  name      String
+  email     String    @unique
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @map("updated_at")
+
+  wishlistGifts WishlistGifts[]
+
+  @@map("wishlist_owner")
+}
+
+model WishlistGifts {
+  id              String @id @default(uuid())
+  wishlistOwnerId String @map("wishlist_owner_id")
+  giftId          String @map("gift_id")
+
+  gift          Gift          @relation(fields: [giftId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  wishlistOwner WishlistOwner @relation(fields: [wishlistOwnerId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+
+  @@map("wishlist_gifts")
 }

@@ -23,7 +23,7 @@ const nunitoSans = Nunito({
 });
 
 export const metadata: Metadata = {
-	title: 'Wedding of the year',
+	title: 'Casamento do Ano',
 	description: '',
 };
 
@@ -34,6 +34,11 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="pt-br" className="min-h-screen antialiased">
+			<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+			<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+			<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+			<link rel="manifest" href="/site.webmanifest" />
+
 			<body className={nunitoSans.className}>
 				<TanstackQueryClientProvider>{children}</TanstackQueryClientProvider>
 
