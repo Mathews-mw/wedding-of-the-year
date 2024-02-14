@@ -14,6 +14,7 @@ import { Camera, Church, Clock5, Gift, MapPin, PartyPopper } from 'lucide-react'
 const caveat = Caveat({
 	subsets: ['latin'],
 	weight: ['400', '500', '600', '700'],
+	display: 'swap',
 });
 
 export default function Home() {

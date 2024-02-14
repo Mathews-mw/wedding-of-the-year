@@ -108,7 +108,7 @@ export function ShoppingCartModal({ trigger, gifts }: IModalProps) {
 
 					<div className="mt-[25px] flex w-full flex-col items-center gap-4 lg:flex-row lg:justify-end">
 						<Dialog.Close asChild className="hiddenOnPhone:w-full">
-							<Button variant="slate">Adicionar mais itens</Button>
+							<Button variant="ghost">Adicionar mais itens</Button>
 						</Dialog.Close>
 
 						{gifts.length > 0 && (

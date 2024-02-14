@@ -5,7 +5,7 @@ export type LogoProps = ComponentProps<'div'>;
 export function Logo({ ...props }: LogoProps) {
 	return (
 		<div {...props}>
-			<span className="text-lg font-bold text-rose-300 lg:text-2xl">O casamento do Ano</span>
+			<span className="text-lg font-bold text-rose-300 lg:text-2xl">Casamento do Ano</span>
 		</div>
 	);
 }

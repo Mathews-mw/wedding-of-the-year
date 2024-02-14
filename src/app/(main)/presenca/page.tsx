@@ -193,6 +193,7 @@ export default function Presenca() {
 								maskChar=" "
 								maskPlaceholder={null}
 								id="phone"
+								type="tel"
 								placeholder="(99) 99999-9999"
 								{...register('phone')}
 							/>

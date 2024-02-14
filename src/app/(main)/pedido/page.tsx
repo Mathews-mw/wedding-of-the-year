@@ -135,7 +135,7 @@ export default function OrderPage() {
 				<div className="flex w-full flex-col justify-end gap-4 lg:flex-row">
 					<Button
 						type="button"
-						variant="slate"
+						variant="outline"
 						onClick={() => router.push('/presentes')}
 						disabled={loading || isSubmitting}
 					>

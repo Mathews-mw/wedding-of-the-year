@@ -10,6 +10,7 @@ import WeddingIllustration from '../../../../public/wedding-illustration.jpg';
 const libreBaskerville = Libre_Baskerville({
 	subsets: ['latin'],
 	weight: ['400', '700'],
+	display: 'swap',
 });
 
 export function ImageHeader() {

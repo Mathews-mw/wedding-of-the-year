@@ -47,17 +47,15 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		title: 'Jogo de Panelas 10 peças',
 		description:
 			'Antiaderente mais resistente, livres de metais pesados e elementos químicos prejudiciais à saúde.',
-		image:
-			'https://images.unsplash.com/photo-1592156553722-a2335059951a?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+		image: '/jogo-panela-10.png',
 		price: 799.0,
 		amount: 1,
 		available: true,
 	},
 	{
 		title: 'Armário Aéreo',
-		description: 'kit 6 Porta Temperos Inox, frasco de vidro.',
-		image:
-			'https://img.freepik.com/fotos-gratis/natureza-morta-com-varias-especiarias_23-2149444662.jpg?w=1380&t=st=1706660124~exp=1706660724~hmac=c4224958ce6e9284c2afb7fb589fe7a9be0d29b86c5ebcbbb7f5fde188de2ade',
+		description: 'Armário de cozinha suspenso.',
+		image: '/armario-aereo.png',
 		price: 478.0,
 		amount: 1,
 		available: true,
@@ -75,8 +73,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		title: 'Ferro de Passar A Vapor Speed Steam Black+Decker Antigotejamento Base Antiaderente',
 		description:
 			'Mantenha suas roupas impecáveis e higienizadas de maneira fácil e rápida com o ferro de passar roupa.',
-		image:
-			'https://images.unsplash.com/photo-1489274495757-95c7c837b101?q=80&w=2030&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+		image: '/ferro-passar.png',
 		price: 239.0,
 		amount: 1,
 		available: true,
@@ -161,8 +158,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 	{
 		title: 'Forno Elétrico Britânia BFE45PI',
 		description: 'Receitas pré-programadas, Trava de Segurança.',
-		image:
-			'https://img.freepik.com/vetores-gratis/forno-de-microondas-branco-com-placa-de-vidro-vazio-no-interior-com-abrir-e-fechar-a-porta_1441-1620.jpg?w=740&t=st=1706660934~exp=1706661534~hmac=c7fc9130d07cf644004fd0375bea743b6104e3efe96e21a1b9178d717f424111',
+		image: '/forno-eletrico.png',
 		price: 459.9,
 		amount: 1,
 		available: true,
@@ -180,8 +176,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 	{
 		title: 'Jogo de 2 Toalhas de Banho',
 		description: 'Transformam seu banho em um momento de puro conforto e cuidado.',
-		image:
-			'https://images.unsplash.com/photo-1617811449482-31093c8cee16?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+		image: '/kit-2-toalhas.png',
 		price: 189.9,
 		amount: 1,
 		available: true,
@@ -218,7 +213,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		title: 'Jogo de cama queen plus 4 peças',
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
-		image: '/jogo-cama.jpg',
+		image: '/jogo-cama-queen-4-pcs.jpg',
 		price: 369.0,
 		amount: 1,
 		available: true,
@@ -236,7 +231,8 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		title: '4 Almofadas quadrada lisa',
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
-		image: '/jogo-cama.jpg',
+		image:
+			'https://images.unsplash.com/photo-1553114552-c4ece3a33c93?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
 		price: 287.9,
 		amount: 1,
 		available: true,
@@ -263,7 +259,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		title: 'Balcão Para Forno de Embutir',
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
-		image: '/jogo-cama.jpg',
+		image: '/gabinete-forno.png',
 		price: 332.0,
 		amount: 1,
 		available: true,
@@ -272,7 +268,8 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		title: 'Balcão de Pia',
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
-		image: '/jogo-cama.jpg',
+		image:
+			'https://images.unsplash.com/photo-1595514535316-b8c85bf9bbf9?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
 		price: 675.0,
 		amount: 1,
 		available: true,
@@ -312,7 +309,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
 		image:
-			'https://img.freepik.com/fotos-gratis/renderizacao-de-cozinha-contemporanea-3d_1048-17291.jpg?w=740&t=st=1706661914~exp=1706662514~hmac=cb97fe56bd970e57fa51d9aff941d31292293c97d283b44be532e75b54fecbd1',
+			'https://images.unsplash.com/photo-1596552183299-000ef779e88d?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
 		price: 1299.0,
 		amount: 1,
 		available: true,
@@ -322,7 +319,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
 		image:
-			'https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?q=80&w=2004&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+			'https://images.unsplash.com/photo-1499933374294-4584851497cc?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
 		price: 799.0,
 		amount: 1,
 		available: true,
@@ -331,8 +328,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		title: 'Armário Aéreo de Canto Reto',
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
-		image:
-			'https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?q=80&w=2004&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+		image: '/armario-aereo-canto-reto.png',
 		price: 474.0,
 		amount: 1,
 		available: true,
@@ -341,8 +337,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		title: 'Conjunto Sala de Jantar Mesa Tampo de Vidro 4 Cadeiras',
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
-		image:
-			'https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?q=80&w=2004&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+		image: '/mesa-jantar.png',
 		price: 1169.9,
 		amount: 1,
 		available: true,
@@ -351,8 +346,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		title: 'Kit Banheiro com Porta Sabonete Líquido 4 Pçs Branco',
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
-		image:
-			'https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?q=80&w=2004&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+		image: '/kit_banheiro.png',
 		price: 316.0,
 		amount: 1,
 		available: true,
@@ -429,7 +423,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
 		image:
-			'https://img.freepik.com/fotos-gratis/recepcionistas-em-ternos-elegantes-durante-o-horario-de-trabalho_23-2149714414.jpg?w=1380&t=st=1706663846~exp=1706664446~hmac=8b5fff59794a29653baa737a0c0a1757bf7566e0dec6aec7a8d5c89209363b11',
+			'https://images.unsplash.com/photo-1551016043-06ec2173531b?q=80&w=1936&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
 		price: 950.0,
 		amount: 1,
 		available: true,
@@ -457,6 +451,10 @@ const giftsData: Prisma.GiftCreateInput[] = [
 ];
 
 async function main() {
+	console.log('Delete gifts...');
+
+	await prisma.gift.deleteMany();
+
 	console.log('Start seeding...');
 
 	for (const gift of giftsData) {
