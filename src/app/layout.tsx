@@ -24,7 +24,7 @@ const nunitoSans = Nunito({
 });
 
 export const metadata: Metadata = {
-	title: 'Casamento do Ano',
+	title: 'N | R',
 	description: '',
 };
 

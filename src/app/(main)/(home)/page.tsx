@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { Metadata } from 'next';
 import { twMerge } from 'tailwind-merge';
 import { Caveat } from 'next/font/google';
 
@@ -16,6 +17,10 @@ const caveat = Caveat({
 	weight: ['400', '500', '600', '700'],
 	display: 'swap',
 });
+
+export const metadata: Metadata = {
+	title: 'N | R - Home',
+};
 
 export default function Home() {
 	const resumeGiftList = giftList.slice(0, 6);
