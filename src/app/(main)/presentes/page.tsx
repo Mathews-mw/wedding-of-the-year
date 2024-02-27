@@ -43,6 +43,8 @@ export default function PresentesPage() {
 				},
 			});
 
+			console.log('gift list request: ', data);
+
 			return data;
 		},
 	});

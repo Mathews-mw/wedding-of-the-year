@@ -4,11 +4,7 @@ import { Prisma } from '@prisma/client';
 import { NextRequest } from 'next/server';
 
 export async function GET(request: NextRequest) {
-	if (request.method !== 'GET') {
-		return new Response(null, {
-			status: 405,
-		});
-	}
+	console.log('gift api request: ', request);
 
 	const { searchParams } = request.nextUrl;
 
@@ -59,7 +55,7 @@ export async function GET(request: NextRequest) {
 		return Response.json(gifts);
 	} catch (error) {
 		console.log('gift route error: ', error);
-		return new Response('Erro ao tentar listar presentes', {
+		return new Response(JSON.stringify(error), {
 			status: 400,
 		});
 	}

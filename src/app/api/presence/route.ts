@@ -11,11 +11,8 @@ const bodySchema = z.object({
 });
 
 export async function POST(request: NextRequest) {
-	if (request.method !== 'POST') {
-		return new Response(null, {
-			status: 405,
-		});
-	}
+	console.log('presence api request: ', request);
+
 	const data = await request.json();
 
 	const { name, email, phone, family_members_amount } = bodySchema.parse(data);
@@ -46,7 +43,7 @@ export async function POST(request: NextRequest) {
 		return Response.json({ message: 'Presença confirmada com sucesso.', guest: result.name });
 	} catch (error) {
 		console.log('presence route error: ', error);
-		return new Response('Erro ao tentar confirmar presença.', {
+		return new Response(JSON.stringify(error), {
 			status: 400,
 		});
 	}
