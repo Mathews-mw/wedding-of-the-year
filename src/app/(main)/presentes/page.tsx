@@ -19,8 +19,11 @@ import { ShoppingCart } from 'lucide-react';
 import { GiftListLoading } from './GiftListLoading';
 import WeddingGifts from '../../../../public/wedding-gifts.png';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { env } from '@/env';
 
 export default function PresentesPage() {
+	console.log('envs: ', env);
+
 	const [sortListValue, setSortListValue] = useState('asc');
 
 	const { order } = useStore((store) => {
