@@ -4,8 +4,6 @@ import { Prisma } from '@prisma/client';
 import { NextRequest } from 'next/server';
 
 export async function GET(request: NextRequest) {
-	console.log('gift api request: ', request);
-
 	const { searchParams } = request.nextUrl;
 
 	const sort = z

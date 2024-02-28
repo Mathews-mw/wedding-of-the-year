@@ -11,8 +11,6 @@ const bodySchema = z.object({
 });
 
 export async function POST(request: NextRequest) {
-	console.log('presence api request: ', request);
-
 	const data = await request.json();
 
 	const { name, email, phone, family_members_amount } = bodySchema.parse(data);

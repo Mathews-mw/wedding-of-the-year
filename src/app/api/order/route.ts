@@ -29,11 +29,6 @@ const bodySchema = z.object({
 });
 
 export async function POST(request: NextRequest) {
-	if (request.method !== 'POST') {
-		return new Response(null, {
-			status: 405,
-		});
-	}
 	const data = await request.json();
 
 	const { giftsIds, name, message } = bodySchema.parse(data);
