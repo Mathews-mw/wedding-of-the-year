@@ -49,7 +49,6 @@ export default function OrderPage() {
 	});
 
 	async function handleCheckoutFormSubmit(data: FormData) {
-		console.log(data);
 		try {
 			setLoading(true);
 
@@ -63,7 +62,6 @@ export default function OrderPage() {
 
 			reset();
 
-			console.log(result);
 			router.push(result.payment_link);
 			setLoading(false);
 		} catch (error) {

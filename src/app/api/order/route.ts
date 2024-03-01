@@ -4,10 +4,10 @@ import { AxiosError } from 'axios';
 import { randomUUID } from 'node:crypto';
 import { NextRequest, NextResponse } from 'next/server';
 
+import { env } from '@/env';
 import { prisma } from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
 import { pagseguroAPI } from '@/lib/pagseguro/pagseguro-api';
-import { env } from '@/env';
 
 interface IPagSeguroItem {
 	reference_id: string;
@@ -33,8 +33,6 @@ export async function POST(request: NextRequest) {
 
 	const { giftsIds, name, message } = bodySchema.parse(data);
 
-	console.log(data);
-
 	try {
 		const gifts = await prisma.gift.findMany({
 			where: {
@@ -53,14 +51,7 @@ export async function POST(request: NextRequest) {
 			};
 		});
 
-		console.log('checkoutItems: ', checkoutItems);
-
 		const expirationDate = dayjs().add(1, 'day');
-		console.log('expirationDate: ', expirationDate);
-
-		console.log(env.PAGSEGURO_REDIRECT_URL);
-		console.log(env.PAGSEGURO_RETURN_URL);
-		console.log(env.PAGSEGURO_NOTIFICATIONS_URL);
 
 		const { data: pagSeguroResult } = await pagseguroAPI.post('/checkouts', {
 			reference_id: randomUUID(),
@@ -88,7 +79,7 @@ export async function POST(request: NextRequest) {
 			payment_notification_urls: [env.PAGSEGURO_NOTIFICATIONS_URL],
 		});
 
-		console.log('pagSeguroResult: ', pagSeguroResult);
+		console.log('pagSeguroResponse: ', pagSeguroResult);
 
 		const order = await prisma.order.create({
 			data: {
@@ -97,8 +88,6 @@ export async function POST(request: NextRequest) {
 				status: 'ACTIVE',
 			},
 		});
-
-		console.log('order: ', order);
 
 		const orderProducts: Prisma.OrderProductsCreateManyInput = pagSeguroResult.items.map(
 			(item: IPagSeguroItem) => {
@@ -111,8 +100,6 @@ export async function POST(request: NextRequest) {
 				};
 			}
 		);
-
-		console.log('orderProducts: ', orderProducts);
 
 		await prisma.orderProducts.createMany({
 			data: orderProducts,

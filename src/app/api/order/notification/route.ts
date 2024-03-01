@@ -6,6 +6,8 @@ import { ICheckoutNotification } from '@/types/pag-seguro';
 export async function POST(request: NextRequest) {
 	const data: ICheckoutNotification = await request.json();
 
+	console.log('notification data: ', data);
+
 	try {
 		const order = await prisma.order.findUnique({
 			where: {
@@ -13,16 +15,12 @@ export async function POST(request: NextRequest) {
 			},
 		});
 
-		console.log('notification order: ', order);
-
 		if (order) {
 			const products = await prisma.orderProducts.findMany({
 				where: {
 					orderId: order.id,
 				},
 			});
-
-			console.log('notification products: ', products);
 
 			order.customerName = data.customer.name;
 			order.customerEmail = data.customer.email;

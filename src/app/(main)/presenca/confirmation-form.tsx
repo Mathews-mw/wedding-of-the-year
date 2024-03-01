@@ -66,6 +66,7 @@ export function ConfirmationForm() {
 			toast.success(`${result.guest}, sua confirmação foi realizada com sucesso.`, {
 				duration: 5000,
 			});
+
 			router.push(`/presenca/confirmacao?guest=${data.name}`);
 		} catch (error) {
 			console.log(error);
