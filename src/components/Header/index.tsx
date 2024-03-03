@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useState } from 'react';
 
 import { Logo } from '../Logo';
@@ -7,7 +8,6 @@ import { Button } from '../Buttons';
 import { Menu } from 'lucide-react';
 import { NavLink } from '../NavLink';
 import { NavDrawer } from '../NavDrawer';
-import Image from 'next/image';
 
 export function Header() {
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false);

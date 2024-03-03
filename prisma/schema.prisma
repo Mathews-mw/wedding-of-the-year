@@ -17,7 +17,20 @@ model User {
   password String
   isAdmin  Boolean @default(false) @map("is_admin")
 
+  session Session?
+
   @@map("users")
+}
+
+model Session {
+  id         String   @id @default(uuid())
+  userId     String   @unique @map("user_id")
+  token      String
+  registerAt DateTime @map("register_at")
+
+  user User @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+
+  @@map("sessions")
 }
 
 model Gift {
@@ -46,15 +59,23 @@ model Guest {
   @@map("guests")
 }
 
+enum OrderStatus {
+  PAID
+  AUTHORIZED
+  IN_ANALYSIS
+  DECLINED
+  CANCELED
+}
+
 model Order {
-  id            String   @id @default(uuid())
-  customerName  String?  @map("customer_name") //Resposta da API do PagSeguro
-  customerEmail String?  @map("customer_email") //Resposta da API do PagSeguro
-  customerCpf   String?  @map("customer_cpf") //Resposta da API do PagSeguro
-  checkoutId    String   @map("checkout_id") //Resposta da API do PagSeguro 
-  referenceId   String   @unique @map("reference_id") //Resposta da API do PagSeguro
-  status        String?
-  created_at    DateTime @default(now())
+  id            String      @id @default(uuid())
+  customerName  String?     @map("customer_name") //Resposta da API do PagSeguro
+  customerEmail String?     @map("customer_email") //Resposta da API do PagSeguro
+  customerCpf   String?     @map("customer_cpf") //Resposta da API do PagSeguro
+  checkoutId    String      @map("checkout_id") //Resposta da API do PagSeguro 
+  referenceId   String      @unique @map("reference_id") //Resposta da API do PagSeguro
+  status        OrderStatus @default(IN_ANALYSIS)
+  created_at    DateTime    @default(now())
 
   orderProducts OrderProducts[]
 

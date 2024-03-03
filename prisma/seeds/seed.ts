@@ -1,9 +1,24 @@
+import { faker } from '@faker-js/faker';
+import { randomUUID } from 'node:crypto';
 import { Prisma, PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+type OrderStatus = 'AUTHORIZED' | 'PAID' | 'IN_ANALYSIS' | 'DECLINED' | 'CANCELED';
+
+interface IMakeOrderRequest {
+	status: OrderStatus;
+}
+
+interface IMakeOrderProductsRequest {
+	itemName: string;
+	giftId: string;
+	orderId: string;
+}
+
 const giftsData: Prisma.GiftCreateInput[] = [
 	{
+		id: randomUUID(),
 		title: 'Jogo de Facas 6 peças inox',
 		description:
 			'Lâminas de aço inox com maior durabilidade do fio devido ao tratamento térmico. Cabos de polipropileno com maior resistência e durabilidade.',
@@ -14,6 +29,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Jogo de 36 peças Talheres Aço Inox',
 		description:
 			'Totalmente em aço inox, o faqueiro além de ser resistente e durável, deixa a composição da sua mesa ainda mais especial.',
@@ -24,6 +40,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Jogo de copos 4 peças 480ml',
 		description:
 			'Feitos Inteiramente em Vidro. Sirva Chá, Sucos, Smoothies ou Outras Bebidas. Elegante, Bonito e Moderno.',
@@ -34,16 +51,18 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Jogo de Panelas 7 peças',
 		description:
 			'Antiaderente mais resistente, livres de metais pesados e elementos químicos prejudiciais à saúde.',
 		image:
-			'https://images.unsplash.com/photo-1592156553722-a2335059951a?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+			'https://img.freepik.com/fotos-gratis/vista-lateral-de-cozinhar-conjunto-de-tachos-e-panelas-nas-prateleiras-de-madeira-jpg_140725-12791.jpg?size=626&ext=jpg&ga=GA1.1.881018375.1706112835&semt=ais',
 		price: 285.0,
 		amount: 1,
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Jogo de Panelas 10 peças',
 		description:
 			'Antiaderente mais resistente, livres de metais pesados e elementos químicos prejudiciais à saúde.',
@@ -53,6 +72,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Armário Aéreo',
 		description: 'Armário de cozinha suspenso.',
 		image: '/armario-aereo.png',
@@ -61,6 +81,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Aspirador de Pó Vertical',
 		description: 'Com um simples toque de um botão, limpa e aspira.',
 		image:
@@ -70,6 +91,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Ferro de Passar A Vapor Speed Steam Black+Decker Antigotejamento Base Antiaderente',
 		description:
 			'Mantenha suas roupas impecáveis e higienizadas de maneira fácil e rápida com o ferro de passar roupa.',
@@ -79,6 +101,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Jogo Panelas Aço 5 peças Inox Solar',
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
@@ -89,6 +112,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Smart TV',
 		description:
 			'Presentear o casal com uma boa Smart TV para que possam, juntinhos, apreciar o melhor do K-Drama na Netflix? Com certeza é uma ótima opção (A Noiva, em especial, vai adorar).',
@@ -99,6 +123,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Batedeira Planetária',
 		description:
 			'POTÊNCIA DE 400W: De claras em neve até massas de bolo, é garantia de uma consistência perfeita!',
@@ -109,6 +134,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Cafeteira Cápsulas',
 		description:
 			'Você pode preparar um cremoso café Espresso, um Chococcino quentinho ou até um chá gelado na sua casa com passos simples e de forma super-rápida.',
@@ -119,6 +145,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Liquidificador Jarra de Vidro',
 		description:
 			'Com a Jarra Inquebrável, você pode, até colocá-la no freezer, ou líquidos quentes, que ela não racha ou danifica.',
@@ -129,6 +156,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Multiprocessador Inox',
 		description:
 			'Exclusiva tecnologia que combina 2 lâminas com ângulos de corte perfeito, muito mais fino e preciso. Assim é possível preparar diversas receitas.',
@@ -138,6 +166,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Air Fryer',
 		description: 'Frita, grelha e assa em temperatura máxima ou mínima.',
 		image:
@@ -147,6 +176,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Forno Micro-ondas',
 		description: 'Receitas pré-programadas, Trava de Segurança.',
 		image:
@@ -156,6 +186,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Forno Elétrico Britânia BFE45PI',
 		description: 'Receitas pré-programadas, Trava de Segurança.',
 		image: '/forno-eletrico.png',
@@ -164,6 +195,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Lavadoura de Roupas',
 		description:
 			'Roupas limpinhas e macias é qualidade de vida. Então, nada melhor que contribuir com o casal com sua lavadoura de roupas.',
@@ -174,6 +206,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Jogo de 2 Toalhas de Banho',
 		description: 'Transformam seu banho em um momento de puro conforto e cuidado.',
 		image: '/kit-2-toalhas.png',
@@ -182,6 +215,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: '2 Toalha de banho',
 		description: 'Transformam seu banho em um momento de puro conforto e cuidado.',
 		image:
@@ -191,6 +225,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Kit para Churrasco 15 Peças',
 		description: 'Transformam seu banho em um momento de puro conforto e cuidado.',
 		image:
@@ -200,6 +235,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Kit toalha de lavabo 4 peças branco',
 		description:
 			'Toque suave e macio das nossas toalhas de algodão premium, que transformam seu banho em um momento de puro conforto e cuidado.',
@@ -210,6 +246,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Jogo de cama queen plus 4 peças',
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
@@ -219,6 +256,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Jogo de cama queen 4 peças',
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
@@ -228,6 +266,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: '4 Almofadas quadrada lisa',
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
@@ -238,6 +277,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Edredom Queen',
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
@@ -247,6 +287,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Kit colcha queen 3 peças',
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
@@ -256,6 +297,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Balcão Para Forno de Embutir',
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
@@ -265,6 +307,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Balcão de Pia',
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
@@ -275,6 +318,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Edredom',
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
@@ -285,6 +329,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: '4 Travesseiros',
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
@@ -295,6 +340,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Guarda Roupas',
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
@@ -305,6 +351,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Armário de Cozinha',
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
@@ -315,6 +362,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Mesa de Cabeceira',
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
@@ -325,6 +373,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Armário Aéreo de Canto Reto',
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
@@ -334,6 +383,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Conjunto Sala de Jantar Mesa Tampo de Vidro 4 Cadeiras',
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
@@ -343,6 +393,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Kit Banheiro com Porta Sabonete Líquido 4 Pçs Branco',
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
@@ -352,6 +403,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Cortina Duplex',
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
@@ -362,6 +414,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Patrocine a despedida do noivo',
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
@@ -372,6 +425,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Patrocine a despedida do noiva',
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
@@ -382,6 +436,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Garrafa de Vinho da lua de mel',
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
@@ -391,6 +446,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Jogo de taças vinho 4 peças ',
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
@@ -400,6 +456,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Passeios da lua de mel',
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
@@ -410,6 +467,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Jantar romântico',
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
@@ -419,6 +477,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Hospedagem da lua-de-mel',
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
@@ -429,16 +488,18 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Jogo de Pratos Rasos (6 Peças)',
 		description:
-			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
+			'Típico estilo de prato que serve bem para todas as refeições. Com um toque de estilo e elegância, é um presente perfeito que merece seu destaque.',
 		image:
-			'https://img.freepik.com/vetores-gratis/pratos-brancos-pratos-de-ceramica-3d-realistas-e-colecao-de-vista-lateral_107791-3743.jpg?w=900&t=st=1707617776~exp=1707618376~hmac=62d1e9ebc07a5f783472f0058785e08ccc67fbe208129304ec592f7d7028f419',
+			'https://img.freepik.com/fotos-gratis/mao-segurando-placas-brancas-na-superficie-cinza-com-superficie-gradiente-de-granulacao-grossa-angustiada_179666-42609.jpg?size=626&ext=jpg&ga=GA1.1.881018375.1706112835&semt=ais',
 		price: 159.9,
 		amount: 2,
 		available: true,
 	},
 	{
+		id: randomUUID(),
 		title: 'Jogo de 6 Pratos Fundos',
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
@@ -450,9 +511,65 @@ const giftsData: Prisma.GiftCreateInput[] = [
 	},
 ];
 
-async function main() {
-	console.log('Delete gifts...');
+function makeOrders({ status }: IMakeOrderRequest): Prisma.OrderCreateInput {
+	const radomCreatedDate = faker.date.between({
+		from: '2024-01-01T00:00:00.000Z',
+		to: '2024-02-29T00:00:00.000Z',
+	});
 
+	return {
+		customerName: faker.person.fullName(),
+		customerEmail: faker.internet.email({ provider: 'gmail.com' }).toLowerCase(),
+		customerCpf: faker.number.int({ min: 99999999999 }).toString(),
+		checkoutId: `CHEC_${randomUUID()}`.toUpperCase(),
+		referenceId: randomUUID(),
+		status,
+		created_at: radomCreatedDate,
+	};
+}
+
+function makeOrderProducts({
+	giftId,
+	itemName,
+	orderId,
+}: IMakeOrderProductsRequest): Prisma.OrderProductsUncheckedCreateInput {
+	return {
+		itemReferenceId: randomUUID(),
+		itemName,
+		itemQuantity: 1,
+		giftId,
+		orderId,
+	};
+}
+
+const paidOrdersList = Array.from({ length: 25 }).map(() => {
+	return makeOrders({ status: 'PAID' });
+});
+
+const declinedOrderList = Array.from({ length: 8 }).map(() => {
+	return makeOrders({ status: 'DECLINED' });
+});
+
+const inAnalysisOrderList = Array.from({ length: 12 }).map(() => {
+	return makeOrders({ status: 'IN_ANALYSIS' });
+});
+
+const canceledOrderList = Array.from({ length: 10 }).map(() => {
+	return makeOrders({ status: 'CANCELED' });
+});
+
+const orderListToCreate = [
+	...paidOrdersList,
+	...declinedOrderList,
+	...inAnalysisOrderList,
+	...canceledOrderList,
+];
+
+async function main() {
+	console.log('Delete db registers...');
+
+	await prisma.orderProducts.deleteMany();
+	await prisma.order.deleteMany();
 	await prisma.gift.deleteMany();
 
 	console.log('Start seeding...');
@@ -465,6 +582,32 @@ async function main() {
 		console.log(`Created gift: ${giftSeed.title}`);
 	}
 
+	for (const order of orderListToCreate) {
+		const randomAmountOfProducts = faker.number.int({ min: 1, max: 5 });
+
+		const orderSeed = await prisma.order.create({
+			data: order,
+		});
+
+		const orderProductsList = Array.from({ length: randomAmountOfProducts }).map(() => {
+			const randomGiftIndex = faker.number.int({ min: 1, max: 45 });
+			const gift = giftsData[randomGiftIndex];
+
+			return makeOrderProducts({
+				itemName: gift.title,
+				giftId: gift.id!,
+				orderId: orderSeed.id,
+			});
+		});
+
+		const orderProductSeed = await prisma.orderProducts.createMany({
+			data: orderProductsList,
+		});
+
+		console.log(`Created order: ${orderSeed.id}`);
+		console.log(`Created amount order_product: ${orderProductSeed.count}`);
+	}
+
 	console.log('Seeding Finished');
 }
 
@@ -473,7 +616,7 @@ main()
 		await prisma.$disconnect();
 	})
 	.catch(async (error) => {
-		console.log('Gifts Seeds Error: ', error);
+		console.log('Db seede error: ', error);
 		await prisma.$disconnect;
 		process.exit(1);
 	});

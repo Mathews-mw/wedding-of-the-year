@@ -9,6 +9,9 @@ export const env = createEnv({
 		PAGSEGURO_REDIRECT_URL: z.string(),
 		PAGSEGURO_RETURN_URL: z.string(),
 		PAGSEGURO_NOTIFICATIONS_URL: z.string(),
+		SECRET_TOKEN: z.string(),
+		NEXTAUTH_URL: z.string().url(),
+		NEXTAUTH_SECRET: z.string(),
 	},
 	client: {
 		NEXT_PUBLIC_API_BASE_URL: z.string().url(),
@@ -22,5 +25,8 @@ export const env = createEnv({
 		PAGSEGURO_REDIRECT_URL: process.env.PAGSEGURO_REDIRECT_URL,
 		PAGSEGURO_RETURN_URL: process.env.PAGSEGURO_RETURN_URL,
 		PAGSEGURO_NOTIFICATIONS_URL: process.env.PAGSEGURO_NOTIFICATIONS_URL,
+		SECRET_TOKEN: process.env.SECRET_TOKEN,
+		NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+		NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
 	},
 });

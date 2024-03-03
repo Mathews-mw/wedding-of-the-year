@@ -12,6 +12,7 @@ import type { Metadata } from 'next';
 import { Nunito } from 'next/font/google';
 
 import { TanstackQueryClientProvider } from '@/providers/TanstackQueryClientProvider';
+import { NextAuthSessionProvider } from '@/providers/SessionProvider';
 
 dayjs.locale('pt-br');
 dayjs.extend(utc);
@@ -41,7 +42,9 @@ export default function RootLayout({
 			<link rel="manifest" href="/site.webmanifest" />
 
 			<body className={nunitoSans.className}>
-				<TanstackQueryClientProvider>{children}</TanstackQueryClientProvider>
+				<NextAuthSessionProvider>
+					<TanstackQueryClientProvider>{children}</TanstackQueryClientProvider>
+				</NextAuthSessionProvider>
 
 				<Toaster richColors />
 			</body>
