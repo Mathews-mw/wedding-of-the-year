@@ -44,6 +44,7 @@
     "react-input-mask": "^2.0.4",
     "react-loading-skeleton": "^3.4.0",
     "react-modern-drawer": "^1.2.2",
+    "sharp": "^0.33.2",
     "sonner": "^1.4.2",
     "tailwind-merge": "^2.2.1",
     "tailwind-variants": "^0.1.20",

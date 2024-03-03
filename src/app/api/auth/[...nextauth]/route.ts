@@ -1,5 +1,6 @@
+import { env } from '@/env';
 import { api } from '@/lib/axios';
-import NextAuth, { NextAuthOptions, Session, User } from 'next-auth';
+import NextAuth, { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
 interface ISessionResponse {
@@ -22,7 +23,7 @@ const nextAuthOptions: NextAuthOptions = {
 			},
 			async authorize(credentials, req) {
 				const { data: sessionResponse, status } = await api.post<ISessionResponse>(
-					'http://localhost:3000/api/session',
+					`${env.APP_URL}/api/session`,
 					{
 						email: credentials?.email,
 						password: credentials?.password,
@@ -37,6 +38,7 @@ const nextAuthOptions: NextAuthOptions = {
 			},
 		}),
 	],
+	secret: `${env.NEXTAUTH_SECRET}`,
 	pages: {
 		signIn: '/sign-in',
 	},
