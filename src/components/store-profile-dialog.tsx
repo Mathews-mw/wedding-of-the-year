@@ -7,6 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { api } from '@/lib/axios';
 import { Button } from './Buttons';
+import { errorHandler } from '@/utils/error-handler';
 import { InputControl, InputRoot } from './Form/Input';
 import {
 	DialogClose,
@@ -16,20 +17,17 @@ import {
 	DialogHeader,
 	DialogTitle,
 } from './ui/dialog';
-import { errorHandler } from '@/utils/error-handler';
 
 const profileForm = z.object({
 	name: z.string().nullable(),
-	currentPassword: z.string().nullable(),
 	newPassword: z.string().nullable(),
+	currentPassword: z.string().nullable(),
 });
 
 type ProfileForm = z.infer<typeof profileForm>;
 
 export function StoreProfileDialog() {
 	const { data, update } = useSession();
-
-	console.log('data: ', data?.user);
 
 	const {
 		handleSubmit,

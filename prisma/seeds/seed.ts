@@ -542,7 +542,7 @@ function makeOrderProducts({
 	};
 }
 
-const paidOrdersList = Array.from({ length: 25 }).map(() => {
+const paidOrdersList = Array.from({ length: 20 }).map(() => {
 	return makeOrders({ status: 'PAID' });
 });
 
@@ -583,7 +583,7 @@ async function main() {
 	}
 
 	for (const order of orderListToCreate) {
-		const randomAmountOfProducts = faker.number.int({ min: 1, max: 5 });
+		const randomAmountOfProducts = faker.number.int({ min: 1, max: 2 });
 
 		const orderSeed = await prisma.order.create({
 			data: order,
@@ -602,6 +602,16 @@ async function main() {
 
 		const orderProductSeed = await prisma.orderProducts.createMany({
 			data: orderProductsList,
+		});
+
+		await prisma.gift.updateMany({
+			data: {
+				amount: 0,
+				available: false,
+			},
+			where: {
+				id: { in: orderProductsList.map((item) => item.giftId) },
+			},
 		});
 
 		console.log(`Created order: ${orderSeed.id}`);

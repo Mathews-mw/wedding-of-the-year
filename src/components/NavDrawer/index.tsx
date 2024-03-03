@@ -41,7 +41,9 @@ export function NavDrawer({ isDrawerOpen, toggleDrawer }: INavDrawerProps) {
 							title="Confirme sua presença"
 							toggleDrawer={toggleDrawer}
 						/>
-						{status === 'authenticated' && <NavItem href="/metricas" title="Métricas" />}
+						{status === 'authenticated' && (
+							<NavItem href="/metricas" title="Métricas" toggleDrawer={toggleDrawer} />
+						)}
 					</nav>
 
 					<div className="space-y-2.5">
@@ -51,7 +53,7 @@ export function NavDrawer({ isDrawerOpen, toggleDrawer }: INavDrawerProps) {
 							<AccountMenuMobile />
 						) : status === 'unauthenticated' ? (
 							<Button variant="ghost">
-								<Link href="/sign-in">
+								<Link href="/sign-in/mobile">
 									<LayoutDashboard className="h-5 w-5 fill-rose-400 stroke-rose-400" />
 								</Link>
 							</Button>
