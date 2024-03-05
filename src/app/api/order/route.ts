@@ -85,7 +85,7 @@ export async function POST(request: NextRequest) {
 			data: {
 				checkoutId: pagSeguroResult.id,
 				referenceId: pagSeguroResult.reference_id,
-				status: 'ACTIVE',
+				status: 'IN_ANALYSIS',
 			},
 		});
 

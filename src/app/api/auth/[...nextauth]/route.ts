@@ -22,6 +22,7 @@ const nextAuthOptions: NextAuthOptions = {
 				password: { label: 'password', type: 'password' },
 			},
 			async authorize(credentials, req) {
+				console.log('app url: ', env.APP_URL);
 				const { data: sessionResponse, status } = await api.post<ISessionResponse>(
 					`${env.APP_URL}/api/session`,
 					{
