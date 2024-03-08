@@ -26,7 +26,8 @@ const nunitoSans = Nunito({
 
 export const metadata: Metadata = {
 	title: 'N | R',
-	description: '',
+	description:
+		' Site de casamento que oferece uma maneira fácil e conveniente para os noivos compartilharem sua lista de presentes e detalhes do casamento com os convidados. Além disso, o site oferece uma forma segura para os convidadossegura de fazer a compra desses presentes.',
 };
 
 export default function RootLayout({
