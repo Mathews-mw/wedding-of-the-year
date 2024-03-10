@@ -75,6 +75,9 @@ model Order {
   checkoutId    String      @map("checkout_id") //Resposta da API do PagSeguro 
   referenceId   String      @unique @map("reference_id") //Resposta da API do PagSeguro
   status        OrderStatus @default(IN_ANALYSIS)
+  linkSelf      String?
+  linkPay       String?
+  linkInactive  String?
   created_at    DateTime    @default(now())
 
   orderProducts OrderProducts[]

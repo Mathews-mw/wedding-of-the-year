@@ -19,11 +19,6 @@ interface IOrderTableRowProps {
 export function OrderTableRow({ order }: IOrderTableRowProps) {
 	const [isDetailsOpen, setIsDetailsOpen] = useState(false);
 
-	const totalOrderFormatted = Number(122.5).toLocaleString('pt-BR', {
-		currency: 'BRL',
-		style: 'currency',
-	});
-
 	const orderCreatedAtFormatted = dayjs(order.created_at).format('DD/MM/YYYY [-] HH:mm');
 	const orderCreatedDistanceToNow = dayjs(order.created_at).fromNow();
 
@@ -49,7 +44,6 @@ export function OrderTableRow({ order }: IOrderTableRowProps) {
 				<OrderStatus status={order.status ?? 'IN_ANALYSIS'} />
 			</TableCell>
 			<TableCell className="font-medium">{order.customerName}</TableCell>
-			<TableCell className="font-medium">{totalOrderFormatted}</TableCell>
 		</TableRow>
 	);
 }

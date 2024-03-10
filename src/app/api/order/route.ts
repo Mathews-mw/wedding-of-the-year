@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import dayjs from 'dayjs';
 import { AxiosError } from 'axios';
+import { cookies } from 'next/headers';
 import { randomUUID } from 'node:crypto';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -28,8 +29,9 @@ const bodySchema = z.object({
 	message: z.optional(z.string()),
 });
 
-export async function POST(request: NextRequest) {
+export async function POST(request: NextRequest, response: NextResponse) {
 	const data = await request.json();
+	const cookieStore = cookies();
 
 	const { giftsIds, name, message } = bodySchema.parse(data);
 
@@ -73,19 +75,30 @@ export async function POST(request: NextRequest) {
 				},
 			],
 			soft_descriptor: 'Casamento Rod&Nai',
-			redirect_url: env.PAGSEGURO_REDIRECT_URL,
+			redirect_url: `${env.PAGSEGURO_REDIRECT_URL}?guest=${name}`,
 			return_url: env.PAGSEGURO_RETURN_URL,
 			notification_urls: [env.PAGSEGURO_NOTIFICATIONS_URL],
 			payment_notification_urls: [env.PAGSEGURO_NOTIFICATIONS_URL],
 		});
 
-		console.log('pagSeguroResponse: ', pagSeguroResult);
+		const paymentLink: IPagSeguroLink = pagSeguroResult.links.find(
+			(link: IPagSeguroLink) => link.rel === 'PAY'
+		);
+		const inactiveLink: IPagSeguroLink = pagSeguroResult.links.find(
+			(link: IPagSeguroLink) => link.rel === 'INACTIVATE'
+		);
+		const selfLink: IPagSeguroLink = pagSeguroResult.links.find(
+			(link: IPagSeguroLink) => link.rel === 'SELF'
+		);
 
 		const order = await prisma.order.create({
 			data: {
 				checkoutId: pagSeguroResult.id,
 				referenceId: pagSeguroResult.reference_id,
 				status: 'IN_ANALYSIS',
+				linkSelf: selfLink.href,
+				linkPay: paymentLink.href,
+				linkInactive: inactiveLink.href,
 			},
 		});
 
@@ -114,9 +127,16 @@ export async function POST(request: NextRequest) {
 			});
 		}
 
-		const paymentLink: IPagSeguroLink = pagSeguroResult.links.find(
-			(link: IPagSeguroLink) => link.rel === 'PAY'
-		);
+		cookieStore.set('@WEDDING_N&R_CHECKOUT_ID', pagSeguroResult.id, {
+			httpOnly: false,
+			path: '/',
+			maxAge: 60 * 60 * 24,
+		});
+		cookieStore.set('@WEDDING_N&R_ORDER_ID', order.id, {
+			httpOnly: false,
+			path: '/',
+			maxAge: 60 * 60 * 24,
+		});
 
 		return Response.json({
 			message: 'Pedido criado com sucesso.',

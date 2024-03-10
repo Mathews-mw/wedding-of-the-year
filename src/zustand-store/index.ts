@@ -1,5 +1,14 @@
-import { IGift } from '@/data/gift-list';
 import { create } from 'zustand';
+
+import { api } from '@/lib/axios';
+import { IGift } from '@/data/gift-list';
+import { IGetOrderDetailsResponse } from '@/app/api/@requests/get-order-details';
+import { canceledOrders } from '@/app/api/@requests/canceled-order';
+
+interface ILoadingExistingOrderRequest {
+	orderId: string;
+	checkoutId: string;
+}
 
 export interface IStoreState {
 	MAXIMUM_WISHLIST_SIZE: number;
@@ -7,6 +16,10 @@ export interface IStoreState {
 	wishlist: IGift[];
 	addToOrder: (gift: IGift) => void;
 	removeToOrder: (gift: IGift) => void;
+	loadingExistingOrder: ({
+		orderId,
+		checkoutId,
+	}: ILoadingExistingOrderRequest) => Promise<void>;
 	addToWishlist: (gift: IGift) => void;
 	removeToWishlist: (gift: IGift) => void;
 }
@@ -31,6 +44,22 @@ export const useStore = create<IStoreState>((set, get) => {
 			const withoutDeletedOne = order.filter((item) => item.id !== gift.id);
 
 			set({ order: withoutDeletedOne });
+		},
+
+		loadingExistingOrder: async ({ orderId, checkoutId }: ILoadingExistingOrderRequest) => {
+			const { data, status } = await api.get<IGetOrderDetailsResponse>(
+				`/orders/${orderId}/details`
+			);
+
+			if (status === 200) {
+				if (checkoutId === data.checkoutId && data.status === 'IN_ANALYSIS') {
+					const existingOrder = data.orderProducts.map((item) => item.gift);
+
+					set({ order: existingOrder });
+
+					await canceledOrders(orderId);
+				}
+			}
 		},
 
 		addToWishlist: (gift: IGift) => {

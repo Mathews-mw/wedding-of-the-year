@@ -1,3 +1,4 @@
+import { cookies } from 'next/headers';
 import { NextRequest } from 'next/server';
 
 import { prisma } from '@/lib/prisma';
@@ -5,8 +6,7 @@ import { ICheckoutNotification } from '@/types/pag-seguro';
 
 export async function POST(request: NextRequest) {
 	const data: ICheckoutNotification = await request.json();
-
-	console.log('notification data: ', data);
+	const cookieStore = cookies();
 
 	try {
 		const order = await prisma.order.findUnique({
@@ -56,6 +56,9 @@ export async function POST(request: NextRequest) {
 				}
 			}
 		}
+
+		cookieStore.delete('@WEDDING_N&R_CHECKOUT_ID');
+		cookieStore.delete('@WEDDING_N&R_ORDER_ID');
 
 		return Response.json({
 			message: 'Operação concluída com sucesso.',

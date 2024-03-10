@@ -1,6 +1,7 @@
 import Image from 'next/image';
 
 import PaymentSuccess from '../../../../../public/payment-success.png';
+import { ThankfulMessage } from './thankful-message';
 
 export default function ConfirmacaoPedidoPage() {
 	return (
@@ -10,10 +11,8 @@ export default function ConfirmacaoPedidoPage() {
 			<div className="mt-20 flex h-full w-full flex-col items-center justify-center space-y-4">
 				<p className="text-lg font-semibold">Seu compra foi realizada com sucesso!</p>
 				<Image src={PaymentSuccess} alt="Pagamento Realizado" quality={100} />
-				<p className="text-center">
-					Gratidão total por contribuir com a lista de presentes. Ficamos muito felizes e, mais
-					uma vez, agradecemos :)
-				</p>
+
+				<ThankfulMessage />
 			</div>
 		</div>
 	);

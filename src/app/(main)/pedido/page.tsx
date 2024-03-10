@@ -1,17 +1,20 @@
 'use client';
 
-import { useStore } from '@/zustand-store';
-import { redirect, useRouter } from 'next/navigation';
-import { Button } from '@/components/Buttons';
-import { Textarea } from '@/components/Form/Textarea';
-import { InputControl, InputRoot } from '@/components/Form/Input';
 import { z } from 'zod';
+
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useStore } from '@/zustand-store';
+import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useState } from 'react';
+
 import { api } from '@/lib/axios';
+import { Button } from '@/components/Buttons';
 import { errorHandler } from '@/utils/error-handler';
+import { Textarea } from '@/components/Form/Textarea';
 import { Spinner } from '@/components/Loaders/Spinner';
+import { InputControl, InputRoot } from '@/components/Form/Input';
+import { getCookie } from '@/utils/get-cookies';
 
 const formSchema = z.object({
 	name: z.optional(z.string()),
@@ -34,9 +37,10 @@ export default function OrderPage() {
 
 	const router = useRouter();
 
-	const { order } = useStore((store) => {
+	const { order, loadingExistingOrder } = useStore((store) => {
 		return {
 			order: store.order,
+			loadingExistingOrder: store.loadingExistingOrder,
 		};
 	});
 
@@ -70,6 +74,29 @@ export default function OrderPage() {
 			errorHandler(error);
 		}
 	}
+
+	async function checkExistenceOfSameOrder() {
+		const checkoutIdCookiesStored = await getCookie('@WEDDING_N&R_CHECKOUT_ID');
+		const orderIdCookiesStored = await getCookie('@WEDDING_N&R_ORDER_ID');
+
+		console.log('checkoutIdCookiesStored: ', checkoutIdCookiesStored);
+		console.log('orderIdCookiesStored: ', orderIdCookiesStored);
+
+		if (checkoutIdCookiesStored && orderIdCookiesStored) {
+			loadingExistingOrder({
+				checkoutId: checkoutIdCookiesStored.value,
+				orderId: orderIdCookiesStored.value,
+			});
+		} else {
+			if (order.length === 0) {
+				router.replace('/presentes');
+			}
+		}
+	}
+
+	useEffect(() => {
+		checkExistenceOfSameOrder();
+	}, []);
 
 	return (
 		<div className="mt-8 space-y-8 hiddenOnPhone:px-4">

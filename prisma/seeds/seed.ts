@@ -41,7 +41,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 	},
 	{
 		id: randomUUID(),
-		title: 'Jogo de copos 4 peças 480ml',
+		title: 'Jogo de copos 4 peças',
 		description:
 			'Feitos Inteiramente em Vidro. Sirva Chá, Sucos, Smoothies ou Outras Bebidas. Elegante, Bonito e Moderno.',
 		image:
@@ -106,7 +106,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
 		image:
-			'https://images.unsplash.com/photo-1489274495757-95c7c837b101?q=80&w=2030&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+			'https://images.unsplash.com/photo-1584990347193-6bebebfeaeee?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
 		price: 580.0,
 		amount: 1,
 		available: true,
@@ -211,17 +211,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		description: 'Transformam seu banho em um momento de puro conforto e cuidado.',
 		image: '/kit-2-toalhas.png',
 		price: 189.9,
-		amount: 1,
-		available: true,
-	},
-	{
-		id: randomUUID(),
-		title: '2 Toalha de banho',
-		description: 'Transformam seu banho em um momento de puro conforto e cuidado.',
-		image:
-			'https://images.unsplash.com/photo-1617811449482-31093c8cee16?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-		price: 180.0,
-		amount: 1,
+		amount: 2,
 		available: true,
 	},
 	{
@@ -283,7 +273,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
 		image: '/jogo-cama.jpg',
 		price: 469.0,
-		amount: 2,
+		amount: 1,
 		available: true,
 	},
 	{
@@ -298,39 +288,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 	},
 	{
 		id: randomUUID(),
-		title: 'Balcão Para Forno de Embutir',
-		description:
-			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
-		image: '/gabinete-forno.png',
-		price: 332.0,
-		amount: 1,
-		available: true,
-	},
-	{
-		id: randomUUID(),
-		title: 'Balcão de Pia',
-		description:
-			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
-		image:
-			'https://images.unsplash.com/photo-1595514535316-b8c85bf9bbf9?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-		price: 675.0,
-		amount: 1,
-		available: true,
-	},
-	{
-		id: randomUUID(),
-		title: 'Edredom',
-		description:
-			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
-		image:
-			'https://img.freepik.com/fotos-gratis/cama-de-edredom-dobravel_53876-133357.jpg?w=1380&t=st=1706661446~exp=1706662046~hmac=83e3951629aeb84a0302561f402e3d55542d4715a945d6f8f2de9cce301e51c9',
-		price: 169.0,
-		amount: 2,
-		available: true,
-	},
-	{
-		id: randomUUID(),
-		title: '4 Travesseiros',
+		title: 'kit 4 Travesseiros',
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
 		image:
@@ -419,7 +377,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
 		image:
-			'https://img.freepik.com/fotos-gratis/homens-felizes-na-despedida-de-solteiro_23-2149275500.jpg?w=1380&t=st=1706662036~exp=1706662636~hmac=fb547658141592250feac1b9119c0c5ec61d662dc9e622ac5f5467eb9925b175',
+			'https://images.unsplash.com/photo-1699730185428-d11054059c7f?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
 		price: 350.0,
 		amount: 1,
 		available: true,
@@ -430,7 +388,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
 		image:
-			'https://img.freepik.com/fotos-gratis/mulheres-fazendo-os-preparativos-para-o-casamento_23-2149184345.jpg?w=1380&t=st=1706662068~exp=1706662668~hmac=a88ab23d5ff7e1378ff5c9e758304628b966b91d1758ffd852ba66e49badbdc6',
+			'https://images.unsplash.com/photo-1518102885802-e869dcb9da8b?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
 		price: 350.0,
 		amount: 1,
 		available: true,
@@ -461,7 +419,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		description:
 			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quis delectus ipsam tempore cum, eius ad ut perferendis, eaque magni dolorem, culpa laborum porro beatae tenetur quasi? Nihil, at maiores.',
 		image:
-			'https://img.freepik.com/fotos-gratis/casal-apaixonado-senta-se-no-cais-e-olha-para-o-mar_8353-11389.jpg?w=1380&t=st=1706662206~exp=1706662806~hmac=1cbe8a934763c73833703b93701fa89cce0803b9e517446cd15d19b868e8122c',
+			'https://images.unsplash.com/photo-1602002418816-5c0aeef426aa?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
 		price: 400.0,
 		amount: 1,
 		available: true,
@@ -495,7 +453,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		image:
 			'https://img.freepik.com/fotos-gratis/mao-segurando-placas-brancas-na-superficie-cinza-com-superficie-gradiente-de-granulacao-grossa-angustiada_179666-42609.jpg?size=626&ext=jpg&ga=GA1.1.881018375.1706112835&semt=ais',
 		price: 159.9,
-		amount: 2,
+		amount: 1,
 		available: true,
 	},
 	{
@@ -506,7 +464,7 @@ const giftsData: Prisma.GiftCreateInput[] = [
 		image:
 			'https://img.freepik.com/vetores-gratis/pratos-brancos-pratos-de-ceramica-3d-realistas-e-colecao-de-vista-lateral_107791-3743.jpg?w=900&t=st=1707617776~exp=1707618376~hmac=62d1e9ebc07a5f783472f0058785e08ccc67fbe208129304ec592f7d7028f419',
 		price: 262.0,
-		amount: 2,
+		amount: 1,
 		available: true,
 	},
 ];

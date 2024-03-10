@@ -30,6 +30,8 @@ export default function PresentesPage() {
 		};
 	});
 
+	console.log('order: ', order);
+
 	const { replace } = useRouter();
 	const pathname = usePathname();
 	const searchParams = useSearchParams();
@@ -63,16 +65,16 @@ export default function PresentesPage() {
 
 	return (
 		<div className="mt-8">
-			<div className="hiddenOnPhone:space-y-4 lg:grid lg:grid-cols-2 lg:gap-8">
+			<div className="lg:grid lg:grid-cols-2 lg:gap-8 hiddenOnPhone:space-y-4">
 				<div>
 					<motion.div
 						animate={{ opacity: 1, x: 0 }}
 						initial={{ opacity: 0, x: -100 }}
 						transition={{ duration: 1, ease: 'easeIn', type: 'spring' }}
 					>
-						<h3 className="hiddenOnPhone:px-2 text-2xl font-semibold">Lista de presentes</h3>
+						<h3 className="text-2xl font-semibold hiddenOnPhone:px-2">Lista de presentes</h3>
 
-						<p className="hiddenOnPhone:px-2 mt-4 text-justify">
+						<p className="mt-4 text-justify hiddenOnPhone:px-2">
 							Dê uma olhadinha em nossa lista de presentes. Ficaremos muito felizes com sua
 							contribuição.
 						</p>
@@ -93,8 +95,8 @@ export default function PresentesPage() {
 				</motion.div>
 			</div>
 
-			<div className="hiddenOnPhone:px-2 mt-8 space-y-4">
-				<div className="hiddenOnPhone:space-y-4 w-full lg:flex lg:justify-between">
+			<div className="mt-8 space-y-4 hiddenOnPhone:px-2">
+				<div className="w-full lg:flex lg:justify-between hiddenOnPhone:space-y-4">
 					{order.length <= 0 ? (
 						<EmptyCartModal
 							trigger={

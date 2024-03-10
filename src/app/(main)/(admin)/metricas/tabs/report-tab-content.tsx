@@ -53,7 +53,6 @@ export function ReportTabContent() {
 								<TableHead className="w-[180px]">Realizado há</TableHead>
 								<TableHead className="w-[140px]">Status</TableHead>
 								<TableHead>Cliente</TableHead>
-								<TableHead className="w-[140px]">Total do pedido</TableHead>
 							</TableRow>
 						</TableHeader>
 
