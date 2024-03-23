@@ -47,7 +47,7 @@ export function GiftDetailModal({ trigger, gift }: IModalProps) {
 							className="max-h-80 max-w-80 rounded-lg object-cover lg:max-h-[480px]"
 						/>
 
-						<p className="text-justify">{gift.description}</p>
+						{/* <p className="text-justify">{gift.description}</p> */}
 					</div>
 
 					<div className="mt-[25px] flex w-full flex-col items-center justify-center gap-4 lg:flex-row lg:justify-between">
