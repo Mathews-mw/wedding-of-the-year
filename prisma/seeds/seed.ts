@@ -540,41 +540,41 @@ async function main() {
 		console.log(`Created gift: ${giftSeed.title}`);
 	}
 
-	for (const order of orderListToCreate) {
-		const randomAmountOfProducts = faker.number.int({ min: 1, max: 2 });
+	// for (const order of orderListToCreate) {
+	// 	const randomAmountOfProducts = faker.number.int({ min: 1, max: 2 });
 
-		const orderSeed = await prisma.order.create({
-			data: order,
-		});
+	// 	const orderSeed = await prisma.order.create({
+	// 		data: order,
+	// 	});
 
-		const orderProductsList = Array.from({ length: randomAmountOfProducts }).map(() => {
-			const randomGiftIndex = faker.number.int({ min: 1, max: 45 });
-			const gift = giftsData[randomGiftIndex];
+	// 	const orderProductsList = Array.from({ length: randomAmountOfProducts }).map(() => {
+	// 		const randomGiftIndex = faker.number.int({ min: 1, max: 45 });
+	// 		const gift = giftsData[randomGiftIndex];
 
-			return makeOrderProducts({
-				itemName: gift.title,
-				giftId: gift.id!,
-				orderId: orderSeed.id,
-			});
-		});
+	// 		return makeOrderProducts({
+	// 			itemName: gift.title,
+	// 			giftId: gift.id!,
+	// 			orderId: orderSeed.id,
+	// 		});
+	// 	});
 
-		const orderProductSeed = await prisma.orderProducts.createMany({
-			data: orderProductsList,
-		});
+	// 	const orderProductSeed = await prisma.orderProducts.createMany({
+	// 		data: orderProductsList,
+	// 	});
 
-		await prisma.gift.updateMany({
-			data: {
-				amount: 0,
-				available: false,
-			},
-			where: {
-				id: { in: orderProductsList.map((item) => item.giftId) },
-			},
-		});
+	// 	await prisma.gift.updateMany({
+	// 		data: {
+	// 			amount: 0,
+	// 			available: false,
+	// 		},
+	// 		where: {
+	// 			id: { in: orderProductsList.map((item) => item.giftId) },
+	// 		},
+	// 	});
 
-		console.log(`Created order: ${orderSeed.id}`);
-		console.log(`Created amount order_product: ${orderProductSeed.count}`);
-	}
+	// 	console.log(`Created order: ${orderSeed.id}`);
+	// 	console.log(`Created amount order_product: ${orderProductSeed.count}`);
+	// }
 
 	console.log('Seeding Finished');
 }
