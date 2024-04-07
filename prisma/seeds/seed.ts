@@ -523,22 +523,31 @@ const orderListToCreate = [
 	...canceledOrderList,
 ];
 
+const guestList: Prisma.GuestCreateManyInput[] = Array.from({ length: 35 }).map(() => {
+	return {
+		name: faker.person.fullName(),
+		email: faker.internet.email(),
+		phone: `929${faker.string.numeric(8)}`,
+		familyMembersAmount: faker.number.int({ min: 0, max: 6 }),
+	};
+});
+
 async function main() {
 	console.log('Delete db registers...');
 
-	await prisma.orderProducts.deleteMany();
-	await prisma.order.deleteMany();
-	await prisma.gift.deleteMany();
+	// await prisma.orderProducts.deleteMany();
+	// await prisma.order.deleteMany();
+	// await prisma.gift.deleteMany();
 
 	console.log('Start seeding...');
 
-	for (const gift of giftsData) {
-		const giftSeed = await prisma.gift.create({
-			data: gift,
-		});
+	// for (const gift of giftsData) {
+	// 	const giftSeed = await prisma.gift.create({
+	// 		data: gift,
+	// 	});
 
-		console.log(`Created gift: ${giftSeed.title}`);
-	}
+	// 	console.log(`Created gift: ${giftSeed.title}`);
+	// }
 
 	// for (const order of orderListToCreate) {
 	// 	const randomAmountOfProducts = faker.number.int({ min: 1, max: 2 });
@@ -575,6 +584,10 @@ async function main() {
 	// 	console.log(`Created order: ${orderSeed.id}`);
 	// 	console.log(`Created amount order_product: ${orderProductSeed.count}`);
 	// }
+
+	await prisma.guest.createMany({
+		data: guestList,
+	});
 
 	console.log('Seeding Finished');
 }
