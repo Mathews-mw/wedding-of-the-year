@@ -25,10 +25,8 @@ export default function MetricsPage() {
 		replace(`${pathname}?${params.toString()}`);
 	}
 
-	console.log('current tab:', currentTab);
-
 	return (
-		<div className="mt-8 flex flex-col gap-4 hiddenOnPhone:px-2">
+		<div className="mb-4 mt-8 flex flex-col gap-4 hiddenOnPhone:px-2">
 			<h1 className="text-xl font-semibold tracking-tight lg:text-2xl">
 				Acompanhamento das métricas do casamento
 			</h1>

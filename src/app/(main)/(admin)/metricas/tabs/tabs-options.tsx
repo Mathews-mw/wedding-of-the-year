@@ -8,7 +8,7 @@ import { GanttChartSquare, TrendingUp, UserRoundCheck } from 'lucide-react';
 export function TabsOptions() {
 	return (
 		<TabsList>
-			<TabItem title="Relatório de vendas" value="report">
+			<TabItem title="Vendas" value="report">
 				<GanttChartSquare className="h-5 w-5 group-data-[state=active]:text-rose-400" />
 			</TabItem>
 
