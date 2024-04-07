@@ -1,9 +1,9 @@
 'use client';
 
+import dayjs from 'dayjs';
 import { Guest } from '@prisma/client';
 
 import { TableCell, TableRow } from '@/components/ui/table';
-import dayjs from 'dayjs';
 
 interface IOrderTableRowProps {
 	guest: Guest;

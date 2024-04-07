@@ -22,10 +22,6 @@ export async function getGuests({
 	perPage,
 	name,
 }: IGetGuestsQuery): Promise<IGetGuestsResponse> {
-	console.log('page: ', page);
-	console.log('per_page: ', perPage);
-	console.log('name: ', name);
-
 	const { data } = await api.get('/guests', {
 		params: {
 			page,

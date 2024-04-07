@@ -43,8 +43,6 @@ export async function GET(request: NextRequest) {
 			}),
 		]);
 
-		console.log('guests: ', guests);
-
 		const totalPages = Math.ceil(count / per_page);
 
 		const pagination = {
