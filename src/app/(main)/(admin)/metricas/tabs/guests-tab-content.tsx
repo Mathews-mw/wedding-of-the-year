@@ -38,7 +38,7 @@ export function GuestsTabContent() {
 	}
 
 	return (
-		<TabsContent value="report" className="mt-8">
+		<TabsContent value="guests" className="mt-8">
 			<span>testando</span>
 			<div className="space-y-2.5">
 				<GuestTableFilters />
@@ -47,10 +47,11 @@ export function GuestsTabContent() {
 					<Table>
 						<TableHeader>
 							<TableRow>
-								<TableHead className="w-[64px]">Nome</TableHead>
-								<TableHead className="w-[320px]">E-mail</TableHead>
-								<TableHead className="w-[180px]">Telefone</TableHead>
-								<TableHead className="w-[140px]">Agregados</TableHead>
+								<TableHead>Nome</TableHead>
+								<TableHead>E-mail</TableHead>
+								<TableHead>Telefone</TableHead>
+								<TableHead className="text-center">Agregados</TableHead>
+								<TableHead className="text-center">Confirmado há</TableHead>
 							</TableRow>
 						</TableHeader>
 

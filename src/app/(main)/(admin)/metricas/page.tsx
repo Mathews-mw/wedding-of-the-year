@@ -41,22 +41,17 @@ export default function MetricsPage() {
 				<TabsOptions />
 
 				<AnimatePresence mode="wait">
-					{/* <motion.div
+					<motion.div
 						key={currentTab}
 						initial={{ x: currentTab === 'report' ? 100 : -100, opacity: 0 }}
 						animate={{ x: 0, opacity: 1 }}
-						exit={{ x: currentTab === 'report' ? 0 : -100, opacity: 0 }}
+						exit={{ x: currentTab === 'report' ? 100 : 0, opacity: 0 }}
 						transition={{ duration: 0.2, type: 'tween' }}
-					> */}
-					{currentTab === 'report' && <ReportTabContent />}
-					{currentTab === 'guests' && (
-						<div>
-							<span>Mostrando a tabela</span>
-							<GoalsTabContent />
-						</div>
-					)}
-					{/* {currentTab === 'goals' && <GoalsTabContent />} */}
-					{/* </motion.div> */}
+					>
+						{currentTab === 'report' && <ReportTabContent />}
+						{currentTab === 'guests' && <GuestsTabContent />}
+						{currentTab === 'goals' && <GoalsTabContent />}
+					</motion.div>
 				</AnimatePresence>
 			</Tabs>
 		</div>
