@@ -10,15 +10,23 @@ export async function GET(request: NextRequest) {
 			},
 		});
 
-		const orderProducts = await prisma.orderProducts.findMany({
-			include: {
-				gift: true,
+		const totalProductsPurchased = await prisma.orderProducts.findMany({
+			where: {
+				order: {
+					status: 'PAID',
+				},
+			},
+			select: {
+				gift: {
+					select: {
+						price: true,
+					},
+				},
 			},
 		});
 
-		const totalPurchases = orderProducts.map((item) => item.gift);
-		const purchasesTotalSum = totalPurchases.reduce((amount, item) => {
-			return (amount += item.price);
+		const purchasesTotalSum = totalProductsPurchased.reduce((amount, item) => {
+			return (amount += item.gift.price);
 		}, 0);
 
 		return Response.json({
@@ -27,6 +35,7 @@ export async function GET(request: NextRequest) {
 		});
 	} catch (error) {
 		console.log('metrics gifts purchased route error: ', error);
+
 		return new Response(JSON.stringify(error), {
 			status: 400,
 		});

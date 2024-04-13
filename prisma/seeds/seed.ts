@@ -500,19 +500,19 @@ function makeOrderProducts({
 	};
 }
 
-const paidOrdersList = Array.from({ length: 20 }).map(() => {
+const paidOrdersList = Array.from({ length: 5 }).map(() => {
 	return makeOrders({ status: 'PAID' });
 });
 
-const declinedOrderList = Array.from({ length: 8 }).map(() => {
+const declinedOrderList = Array.from({ length: 2 }).map(() => {
 	return makeOrders({ status: 'DECLINED' });
 });
 
-const inAnalysisOrderList = Array.from({ length: 12 }).map(() => {
+const inAnalysisOrderList = Array.from({ length: 3 }).map(() => {
 	return makeOrders({ status: 'IN_ANALYSIS' });
 });
 
-const canceledOrderList = Array.from({ length: 10 }).map(() => {
+const canceledOrderList = Array.from({ length: 1 }).map(() => {
 	return makeOrders({ status: 'CANCELED' });
 });
 
@@ -535,55 +535,55 @@ const guestList: Prisma.GuestCreateManyInput[] = Array.from({ length: 35 }).map(
 async function main() {
 	console.log('Delete db registers...');
 
-	// await prisma.orderProducts.deleteMany();
-	// await prisma.order.deleteMany();
-	// await prisma.gift.deleteMany();
+	await prisma.orderProducts.deleteMany();
+	await prisma.order.deleteMany();
+	await prisma.gift.deleteMany();
 
 	console.log('Start seeding...');
 
-	// for (const gift of giftsData) {
-	// 	const giftSeed = await prisma.gift.create({
-	// 		data: gift,
-	// 	});
+	for (const gift of giftsData) {
+		const giftSeed = await prisma.gift.create({
+			data: gift,
+		});
 
-	// 	console.log(`Created gift: ${giftSeed.title}`);
-	// }
+		console.log(`Created gift: ${giftSeed.title}`);
+	}
 
-	// for (const order of orderListToCreate) {
-	// 	const randomAmountOfProducts = faker.number.int({ min: 1, max: 2 });
+	for (const order of orderListToCreate) {
+		const randomAmountOfProducts = faker.number.int({ min: 1, max: 2 });
 
-	// 	const orderSeed = await prisma.order.create({
-	// 		data: order,
-	// 	});
+		const orderSeed = await prisma.order.create({
+			data: order,
+		});
 
-	// 	const orderProductsList = Array.from({ length: randomAmountOfProducts }).map(() => {
-	// 		const randomGiftIndex = faker.number.int({ min: 1, max: 45 });
-	// 		const gift = giftsData[randomGiftIndex];
+		const orderProductsList = Array.from({ length: randomAmountOfProducts }).map(() => {
+			const randomGiftIndex = faker.number.int({ min: 1, max: giftsData.length - 1 });
+			const gift = giftsData[randomGiftIndex];
 
-	// 		return makeOrderProducts({
-	// 			itemName: gift.title,
-	// 			giftId: gift.id!,
-	// 			orderId: orderSeed.id,
-	// 		});
-	// 	});
+			return makeOrderProducts({
+				itemName: gift.title,
+				giftId: gift.id!,
+				orderId: orderSeed.id,
+			});
+		});
 
-	// 	const orderProductSeed = await prisma.orderProducts.createMany({
-	// 		data: orderProductsList,
-	// 	});
+		const orderProductSeed = await prisma.orderProducts.createMany({
+			data: orderProductsList,
+		});
 
-	// 	await prisma.gift.updateMany({
-	// 		data: {
-	// 			amount: 0,
-	// 			available: false,
-	// 		},
-	// 		where: {
-	// 			id: { in: orderProductsList.map((item) => item.giftId) },
-	// 		},
-	// 	});
+		await prisma.gift.updateMany({
+			data: {
+				amount: 0,
+				available: false,
+			},
+			where: {
+				id: { in: orderProductsList.map((item) => item.giftId) },
+			},
+		});
 
-	// 	console.log(`Created order: ${orderSeed.id}`);
-	// 	console.log(`Created amount order_product: ${orderProductSeed.count}`);
-	// }
+		console.log(`Created order: ${orderSeed.id}`);
+		console.log(`Created amount order_product: ${orderProductSeed.count}`);
+	}
 
 	await prisma.guest.createMany({
 		data: guestList,
