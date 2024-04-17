@@ -1,7 +1,5 @@
 import Image from 'next/image';
-import { Suspense } from 'react';
 
-import { ThankfulMessage } from './thankful-message';
 import PaymentSuccess from '../../../../../public/payment-success.png';
 
 export default function ConfirmacaoPedidoPage() {
@@ -13,9 +11,10 @@ export default function ConfirmacaoPedidoPage() {
 				<p className="text-lg font-semibold">Seu compra foi realizada com sucesso!</p>
 				<Image src={PaymentSuccess} alt="Pagamento Realizado" quality={100} />
 
-				<Suspense fallback={<div>Carregando...</div>}>
-					<ThankfulMessage />
-				</Suspense>
+				<p className="text-center">
+					Gratidão total por contribuir com a nossa lista de presentes. Ficamos muito felizes
+					com a sua generosidade e participação.
+				</p>
 			</div>
 		</div>
 	);

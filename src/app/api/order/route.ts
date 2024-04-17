@@ -75,7 +75,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
 				},
 			],
 			soft_descriptor: 'Casamento Rod&Nai',
-			redirect_url: `${env.PAGSEGURO_REDIRECT_URL}?guest=${name}`,
+			redirect_url: `${env.PAGSEGURO_REDIRECT_URL}`,
 			return_url: env.PAGSEGURO_RETURN_URL,
 			notification_urls: [env.PAGSEGURO_NOTIFICATIONS_URL],
 			payment_notification_urls: [env.PAGSEGURO_NOTIFICATIONS_URL],
