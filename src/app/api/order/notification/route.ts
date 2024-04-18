@@ -44,7 +44,7 @@ export async function POST(request: NextRequest) {
 
 					if (gift) {
 						gift.amount = gift.amount - 1;
-						gift.available = gift.amount !== 0;
+						gift.available = gift.amount > 0;
 
 						await prisma.gift.update({
 							data: gift,
