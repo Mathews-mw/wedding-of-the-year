@@ -32,6 +32,7 @@ export function ReportTabContent() {
 				customerName,
 				status: status === 'all' ? undefined : status,
 			}),
+		staleTime: 1000 * 60 * 2, // 2 minutes
 	});
 
 	function handlePaginate(page: number) {

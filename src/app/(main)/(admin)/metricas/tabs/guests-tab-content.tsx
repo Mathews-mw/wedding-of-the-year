@@ -30,6 +30,7 @@ export function GuestsTabContent() {
 				perPage,
 				name,
 			}),
+		staleTime: 1000 * 60 * 2, // 2 minutes
 	});
 
 	function handlePaginate(page: number) {

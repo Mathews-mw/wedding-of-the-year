@@ -10,6 +10,7 @@ export function CardRevenue() {
 	const { data: response } = useQuery({
 		queryKey: ['metrics-revenue'],
 		queryFn: getMetricsRevenue,
+		staleTime: 1000 * 60 * 2, // 2 minutes
 	});
 
 	const metricPercent = response

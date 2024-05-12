@@ -10,6 +10,7 @@ export function CardGiftsPurchased() {
 	const { data: response } = useQuery({
 		queryKey: ['metrics-gifts-purchased'],
 		queryFn: getMetricsGiftsPurchased,
+		staleTime: 1000 * 60 * 2, // 2 minutes
 	});
 
 	const totalPercent = response
