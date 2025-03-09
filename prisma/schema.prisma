@@ -1,0 +1,111 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String  @id @default(uuid())
+  name     String
+  email    String  @unique
+  password String
+  isAdmin  Boolean @default(false) @map("is_admin")
+
+  session Session?
+
+  @@map("users")
+}
+
+model Session {
+  id         String   @id @default(uuid())
+  userId     String   @unique @map("user_id")
+  token      String
+  registerAt DateTime @map("register_at")
+
+  user User @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model Guest {
+  id                  String   @id @default(uuid())
+  name                String
+  email               String   @unique
+  phone               String
+  familyMembersAmount Int      @map("family_members_amount")
+  created_at          DateTime @default(now())
+
+  @@map("guests")
+}
+
+model Product {
+  id          String  @id @default(uuid())
+  title       String  @unique
+  description String
+  image       String
+  price       Float
+  amount      Int
+  available   Boolean @default(true)
+
+  orderProducts OrderProducts[]
+
+  @@map("products")
+}
+
+enum OrderStatus {
+  PAID
+  AUTHORIZED
+  IN_ANALYSIS
+  DECLINED
+  CANCELED
+}
+
+model Order {
+  id            String      @id @default(uuid())
+  customerName  String?     @map("customer_name") //Resposta da API do PagSeguro
+  customerEmail String?     @map("customer_email") //Resposta da API do PagSeguro
+  customerCpf   String?     @map("customer_cpf") //Resposta da API do PagSeguro
+  checkoutId    String      @map("checkout_id") //Resposta da API do PagSeguro 
+  referenceId   String      @unique @map("reference_id") //Resposta da API do PagSeguro
+  status        OrderStatus @default(IN_ANALYSIS)
+  linkSelf      String?     @map("link_self")
+  linkPay       String?     @map("link_pay")
+  linkInactive  String?     @map("link_inactive")
+  created_at    DateTime    @default(now()) @map("created_at")
+
+  orderProducts OrderProducts[]
+
+  @@map("orders")
+}
+
+model OrderProducts {
+  id              String @id @default(uuid())
+  itemReferenceId String @map("item_reference_id") //Resposta da API do PagSeguro
+  itemName        String @map("item_name") //Resposta da API do PagSeguro
+  itemQuantity    Int    @map("item_quantity") //Resposta da API do PagSeguro
+  productId       String @map("product_id")
+  orderId         String @map("order_id")
+
+  product Product @relation(fields: [productId], references: [id], onUpdate: Cascade)
+  order   Order   @relation(fields: [orderId], references: [id], onUpdate: Cascade)
+
+  @@map("order_products")
+}
+
+model Message {
+  id          String   @id @default(uuid())
+  from        String
+  messageText String   @map("message_text")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@map("messages")
+}
