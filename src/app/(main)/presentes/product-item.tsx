@@ -19,31 +19,26 @@ export function ProductItem({ product }: IProps) {
 	return (
 		<motion.div
 			key={product.id}
-			whileHover={{ scale: 1.03 }}
+			whileHover={{ scale: 1.01 }}
 			transition={{ type: 'spring', stiffness: 400, damping: 10 }}
 			className={twMerge([
-				'flex flex-col items-center justify-center space-y-2 rounded-[6px] border border-slate-200 px-4 pt-1 pb-4 shadow-sm',
+				'flex flex-col items-center justify-center space-y-2 rounded-[6px] border p-4 shadow-sm',
 				`${product.available ? 'opacity-100' : 'opacity-50'}`,
 			])}
 		>
-			{product.amount > 0 && (
-				<div className="flex w-full justify-end">
-					<span className="text-[10px] font-bold">{product.amount} UN</span>
-				</div>
-			)}
-
 			<Image
 				src={product.image}
 				quality={100}
+				priority={true}
 				alt={product.title}
 				width={320}
 				height={320}
-				className="h-[208px] w-[208px] rounded-lg object-cover"
+				className="h-[320px] w-[320px] rounded object-cover"
 			/>
 
-			<span className="text-center text-sm">{product.title}</span>
+			<span className="text text-center text-lg">{product.title}</span>
 
-			<span className="font-semibold text-slate-600">
+			<span className="font-semibold">
 				{product.price.toLocaleString('pt-BR', {
 					style: 'currency',
 					currency: 'BRL',

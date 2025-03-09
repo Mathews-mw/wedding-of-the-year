@@ -7,10 +7,18 @@ import { useRouter } from 'next/navigation';
 import { ProductItem } from './product-item';
 import { mockProductList } from '@/data/mock-products-list';
 import { twMerge } from 'tailwind-merge';
+import { useQuery } from '@tanstack/react-query';
+import { listingProducts } from '@/app/api/@requests/listing-products';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export function ProductList() {
 	const order = [];
 	const router = useRouter();
+
+	const { data: products } = useQuery({
+		queryKey: ['products'],
+		queryFn: async () => listingProducts({ sort: 'asc' }),
+	});
 
 	return (
 		<div className="mt-8 space-y-4 px-2">
@@ -48,9 +56,22 @@ export function ProductList() {
 					'sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3',
 				])}
 			>
-				{mockProductList.map((product) => {
-					return <ProductItem key={product.id} product={product} />;
-				})}
+				{products ? (
+					<>
+						{products.map((product) => {
+							return <ProductItem key={product.id} product={product} />;
+						})}
+					</>
+				) : (
+					<>
+						<Skeleton className="h-[320px] w-[320px] rounded-[6px]" />
+						<Skeleton className="h-[320px] w-[320px] rounded-[6px]" />
+						<Skeleton className="h-[320px] w-[320px] rounded-[6px]" />
+						<Skeleton className="h-[320px] w-[320px] rounded-[6px]" />
+						<Skeleton className="h-[320px] w-[320px] rounded-[6px]" />
+						<Skeleton className="h-[320px] w-[320px] rounded-[6px]" />
+					</>
+				)}
 			</div>
 		</div>
 	);

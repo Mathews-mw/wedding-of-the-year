@@ -42,13 +42,13 @@ export async function GET(request: NextRequest) {
 				break;
 		}
 
-		const gifts = await prisma.product.findMany({
+		const products = await prisma.product.findMany({
 			orderBy: query.orderBy,
 		});
 
-		return Response.json(gifts);
+		return Response.json(products);
 	} catch (error) {
-		console.log('gift route error: ', error);
+		console.log('products route error: ', error);
 		return new Response(JSON.stringify(error), {
 			status: 400,
 		});

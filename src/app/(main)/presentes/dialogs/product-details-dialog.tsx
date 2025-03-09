@@ -46,6 +46,8 @@ export function ProductDetailsDialog({ product }: IProps) {
 					</strong>
 				</div>
 
+				<span className="text-muted-foreground text-sm">{product.amount} Unidades restantes</span>
+
 				<DialogFooter>
 					<Button onClick={() => addToCart({ productId: product.id, price: product.price, quantity: 1 })}>
 						Adicionar ao carrinho

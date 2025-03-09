@@ -16,8 +16,6 @@ export function NavLink() {
 
 			{/* {status === 'authenticated' && <NavItem href="/metricas" title="Métricas" />} */}
 
-			<div className="h-8 w-px bg-zinc-200" />
-
 			{/* {status === 'authenticated' && <AccountMenu />} */}
 		</nav>
 	);

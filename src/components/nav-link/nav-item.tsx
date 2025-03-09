@@ -25,7 +25,7 @@ export function NavItem({ href, title, toggleDrawer, ...rest }: INavItemProps) {
 			data-state={isActive}
 			onClick={toggleDrawer}
 			className={twMerge([
-				'flex items-start gap-4 rounded p-2 text-slate-500',
+				'flex items-start gap-4 rounded p-2',
 				'hover:text-rose-400',
 				'data-[state=true]:font-medium data-[state=true]:text-rose-400',
 			])}

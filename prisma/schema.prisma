@@ -37,12 +37,11 @@ model Session {
 }
 
 model Guest {
-  id                  String   @id @default(uuid())
-  name                String
-  email               String   @unique
-  phone               String
-  familyMembersAmount Int      @map("family_members_amount")
-  created_at          DateTime @default(now())
+  id         String   @id @default(uuid())
+  name       String
+  email      String   @unique
+  phone      String
+  created_at DateTime @default(now())
 
   @@map("guests")
 }

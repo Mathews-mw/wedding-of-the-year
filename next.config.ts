@@ -18,6 +18,10 @@ const nextConfig: NextConfig = {
 				protocol: 'https',
 				hostname: 'img.freepik.com',
 			},
+			{
+				protocol: 'https',
+				hostname: 'a-static.mlcdn.com.br',
+			},
 		],
 	},
 };

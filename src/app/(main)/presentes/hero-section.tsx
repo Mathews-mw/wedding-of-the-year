@@ -31,7 +31,7 @@ export function HeroSection() {
 					height={520}
 					quality={100}
 					alt=""
-					className="h-72 object-cover lg:h-96 lg:rounded-lg"
+					className="h-96 rounded-[6px] object-cover"
 				/>
 			</motion.div>
 		</div>
