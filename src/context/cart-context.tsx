@@ -1,16 +1,15 @@
 'use client';
 
+import { Product } from '@prisma/client';
 import { createContext, useContext, useEffect, useState } from 'react';
 
 interface ICartItems {
-	productId: string;
+	product: Product;
 	quantity: number;
-	price: number;
 }
 
 interface IAddToCartRequest {
-	productId: string;
-	price: number;
+	product: Product;
 	quantity?: number;
 }
 
@@ -31,42 +30,41 @@ export const CartContext = createContext({} as ICartContextType);
 export function CartContextProvider({ children }: { children: React.ReactNode }) {
 	const [cartItems, setCartItems] = useState<ICartItems[]>(() => {
 		if (typeof window !== 'undefined') {
-			const savedCart = localStorage.getItem('cart');
+			const savedCart = localStorage.getItem('@wedding-cart');
 			return savedCart ? JSON.parse(savedCart) : [];
 		}
 		return [];
 	});
 
-	function addToCart({ productId, price, quantity }: IAddToCartRequest) {
+	function addToCart({ product, quantity }: IAddToCartRequest) {
 		setCartItems((state) => {
-			const productInCart = state.some((item) => item.productId === productId);
+			const productInCart = state.some((item) => item.product.id === product.id);
 
 			if (productInCart) {
 				return state.map((item) => {
-					if (item.productId === productId) {
+					if (item.product.id === product.id) {
 						return {
 							...item,
 							quantity: quantity ?? item.quantity + 1,
-							price: item.price,
 						};
 					} else {
 						return item;
 					}
 				});
 			} else {
-				return [...state, { productId, quantity: quantity ?? 1, price }];
+				return [...state, { product, quantity: quantity ?? 1 }];
 			}
 		});
 	}
 
 	function removeFromCart({ productId }: IRemoveRequest) {
-		setCartItems((prev) => prev.filter((item) => !(item.productId === productId)));
+		setCartItems((prev) => prev.filter((item) => !(item.product.id === productId)));
 	}
 
 	function decrementProductFromCart({ productId }: IRemoveRequest) {
 		setCartItems((prev) => {
 			return prev.map((item) => {
-				if (item.productId === productId) {
+				if (item.product.id === productId) {
 					return { ...item, quantity: item.quantity > 1 ? item.quantity - 1 : 1 };
 				} else {
 					return item;
@@ -77,18 +75,18 @@ export function CartContextProvider({ children }: { children: React.ReactNode })
 
 	function clearCart() {
 		setCartItems([]);
-		sessionStorage.removeItem('cart');
+		sessionStorage.removeItem('@wedding-cart');
 	}
 
 	useEffect(() => {
-		if (cartItems.length > 0 || localStorage.getItem('cart') !== null) {
-			localStorage.setItem('cart', JSON.stringify(cartItems));
+		if (cartItems.length > 0 || localStorage.getItem('@wedding-cart') !== null) {
+			localStorage.setItem('@wedding-cart', JSON.stringify(cartItems));
 		}
 	}, [cartItems]);
 
 	useEffect(() => {
 		const handleStorageChange = (event: StorageEvent) => {
-			if (event.key === 'cart') {
+			if (event.key === '@wedding-cart') {
 				const updatedCart = event.newValue ? JSON.parse(event.newValue) : [];
 				setCartItems(updatedCart);
 			}

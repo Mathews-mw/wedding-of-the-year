@@ -55,7 +55,7 @@ model Product {
   amount      Int
   available   Boolean @default(true)
 
-  orderProducts OrderProducts[]
+  orderProducts OrderProduct[]
 
   @@map("products")
 }
@@ -66,33 +66,42 @@ enum OrderStatus {
   IN_ANALYSIS
   DECLINED
   CANCELED
+  AWAITING
+  CONFIRMED
+}
+
+enum OrderPaymentType {
+  A_DEFINIR
+  PIX
+  CARTAO_CREDITO
+  DEBITO
+  BOLETO
 }
 
 model Order {
-  id            String      @id @default(uuid())
-  customerName  String?     @map("customer_name") //Resposta da API do PagSeguro
-  customerEmail String?     @map("customer_email") //Resposta da API do PagSeguro
-  customerCpf   String?     @map("customer_cpf") //Resposta da API do PagSeguro
-  checkoutId    String      @map("checkout_id") //Resposta da API do PagSeguro 
-  referenceId   String      @unique @map("reference_id") //Resposta da API do PagSeguro
-  status        OrderStatus @default(IN_ANALYSIS)
-  linkSelf      String?     @map("link_self")
-  linkPay       String?     @map("link_pay")
-  linkInactive  String?     @map("link_inactive")
-  created_at    DateTime    @default(now()) @map("created_at")
+  id            String           @id @default(uuid())
+  customerName  String?          @map("customer_name") //Resposta da API do PagSeguro
+  customerEmail String?          @map("customer_email") //Resposta da API do PagSeguro
+  customerCpf   String?          @map("customer_cpf") //Resposta da API do PagSeguro
+  checkoutId    String           @map("checkout_id") //Resposta da API do PagSeguro 
+  referenceId   String           @unique @map("reference_id") //Resposta da API do PagSeguro
+  status        OrderStatus      @default(IN_ANALYSIS)
+  paymentType   OrderPaymentType @default(A_DEFINIR) @map("payment_type")
+  created_at    DateTime         @default(now()) @map("created_at")
 
-  orderProducts OrderProducts[]
+  orderProducts OrderProduct[]
 
   @@map("orders")
 }
 
-model OrderProducts {
+model OrderProduct {
   id              String @id @default(uuid())
   itemReferenceId String @map("item_reference_id") //Resposta da API do PagSeguro
   itemName        String @map("item_name") //Resposta da API do PagSeguro
   itemQuantity    Int    @map("item_quantity") //Resposta da API do PagSeguro
   productId       String @map("product_id")
   orderId         String @map("order_id")
+  price           Float
 
   product Product @relation(fields: [productId], references: [id], onUpdate: Cascade)
   order   Order   @relation(fields: [orderId], references: [id], onUpdate: Cascade)

@@ -6,27 +6,38 @@ import { NextRequest } from 'next/server';
 export async function GET(request: NextRequest) {
 	const { searchParams } = request.nextUrl;
 
-	const sort = z.enum(['asc', 'desc', 'lowest', 'biggest']).nullish().default('asc').parse(searchParams.get('sort'));
+	const orderBy = z
+		.enum(['az', 'za', 'lowestPrice', 'highPrice'])
+		.nullish()
+		.default('az')
+		.parse(searchParams.get('orderBy'));
 
 	try {
 		let query: Prisma.ProductFindManyArgs;
 
-		switch (sort) {
-			case 'desc':
+		switch (orderBy) {
+			case 'az':
+				query = {
+					orderBy: {
+						title: 'asc',
+					},
+				};
+				break;
+			case 'za':
 				query = {
 					orderBy: {
 						title: 'desc',
 					},
 				};
 				break;
-			case 'biggest':
+			case 'highPrice':
 				query = {
 					orderBy: {
 						price: 'desc',
 					},
 				};
 				break;
-			case 'lowest':
+			case 'lowestPrice':
 				query = {
 					orderBy: {
 						price: 'asc',

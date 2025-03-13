@@ -5,13 +5,13 @@ import { api } from '@/lib/api-client';
 import { ApiExceptionsError } from './error-handler/api-exceptions-error';
 
 export interface IParams {
-	sort: string;
+	orderBy: string;
 }
 
-export async function listingProducts({ sort }: IParams): Promise<Product[]> {
+export async function listingProducts({ orderBy }: IParams): Promise<Product[]> {
 	try {
 		const params = {
-			sort,
+			orderBy,
 		};
 
 		// Remove undefined/null values
@@ -19,7 +19,9 @@ export async function listingProducts({ sort }: IParams): Promise<Product[]> {
 
 		const response = await api
 			.get('products', {
-				searchParams: sort,
+				searchParams: {
+					orderBy,
+				},
 			})
 			.json<Product[]>();
 

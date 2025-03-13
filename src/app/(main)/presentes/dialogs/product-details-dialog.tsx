@@ -49,9 +49,7 @@ export function ProductDetailsDialog({ product }: IProps) {
 				<span className="text-muted-foreground text-sm">{product.amount} Unidades restantes</span>
 
 				<DialogFooter>
-					<Button onClick={() => addToCart({ productId: product.id, price: product.price, quantity: 1 })}>
-						Adicionar ao carrinho
-					</Button>
+					<Button onClick={() => addToCart({ product, quantity: 1 })}>Adicionar ao carrinho</Button>
 
 					<DialogClose asChild>
 						<Button variant="outline">Fechar</Button>
