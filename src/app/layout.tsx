@@ -1,12 +1,15 @@
-import type { Metadata } from 'next';
-import dayjs from 'dayjs';
-import { Geist, Geist_Mono, Nunito } from 'next/font/google';
 import './globals.css';
 import 'dayjs/locale/pt-br';
+
+import dayjs from 'dayjs';
+import { Toaster } from 'sonner';
 import utc from 'dayjs/plugin/utc';
+import type { Metadata } from 'next';
+import { Nunito } from 'next/font/google';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import { TanstackQueryClientProvider } from '@/providers/tanstack-query-client-provider';
+
 import { CartContextProvider } from '@/context/cart-context';
+import { TanstackQueryClientProvider } from '@/providers/tanstack-query-client-provider';
 
 dayjs.locale('pt-br');
 dayjs.extend(utc);
@@ -40,6 +43,8 @@ export default function RootLayout({
 				<TanstackQueryClientProvider>
 					<CartContextProvider>{children}</CartContextProvider>
 				</TanstackQueryClientProvider>
+
+				<Toaster richColors closeButton duration={1000 * 10} />
 			</body>
 		</html>
 	);

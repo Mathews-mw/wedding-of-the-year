@@ -39,9 +39,9 @@ export function ImageHeader() {
 					animate={{ opacity: 1, x: 0 }}
 					initial={{ opacity: 0, x: 150 }}
 					transition={{ duration: 3, ease: 'easeIn', type: 'spring' }}
-					className="flex w-[50%] flex-col items-center space-y-2 pr-10 text-rose-400 lg:pr-40"
+					className="mt-8 flex w-[50%] flex-col items-center space-y-2 pr-10 text-rose-400 lg:pr-40"
 				>
-					<span className="text-sm font-light text-nowrap lg:text-xl">Laura & Fábio</span>
+					<span className="text-sm font-light text-nowrap lg:text-xl">Fábio & Laura</span>
 					<div className="h-px w-40 bg-gradient-to-r from-rose-200 via-rose-400 to-rose-200 shadow-sm lg:w-56" />
 					<span className="text-xs text-nowrap lg:text-lg">18 DE MAIO DE 2024</span>
 				</motion.div>

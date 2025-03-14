@@ -12,6 +12,9 @@ import { Input } from '@/components/ui/input';
 
 import { Loader2 } from 'lucide-react';
 import { PhoneInput } from '@/components/phone-input';
+import { confirmPresence } from '@/app/api/@requests/confirm-presence';
+import { errorHandler } from '@/app/api/@requests/error-handler/error-handler';
+import { phoneRemoveFormatter } from '@/utils/phone-remove-formatter';
 
 const formSchema = z.object({
 	name: z.string().min(1, { message: 'Por favor, preencha o campo.' }),
@@ -19,7 +22,9 @@ const formSchema = z.object({
 		.string()
 		.email({ message: 'Preencha com um e-mail válido.' })
 		.min(1, { message: 'Por favor, preencha o campo.' }),
-	phone: z.string().min(15, { message: 'Por favor, preencha o campo.' }),
+	phone: z
+		.string({ required_error: 'Por favor, preencha o campo.' })
+		.min(15, { message: 'Por favor, informe um telefone válido.' }),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -37,35 +42,33 @@ export function ConfirmationForm() {
 
 	const router = useRouter();
 
-	// const { mutateAsync: confirmationFn, isPending } = useMutation({
-	// 	mutationFn: async (data: FormData) =>
-	// 		await api.post('/presence', {
-	// 			name: data.name,
-	// 			email: data.email,
-	// 			phone: data.phone,
-	// 			family_members_amount: data.familyMembersAmount,
-	// 		}),
-	// });
+	const { mutateAsync: confirmationFn, isPending } = useMutation({
+		mutationFn: confirmPresence,
+	});
 
-	// async function handleConfirmationFormSubmit(data: FormData) {
-	// 	try {
-	// 		const { data: result } = await confirmationFn(data);
+	async function handleConfirmationFormSubmit(data: FormData) {
+		try {
+			const result = await confirmationFn({
+				name: data.name,
+				email: data.email,
+				phone: phoneRemoveFormatter(data.phone),
+			});
 
-	// 		reset();
-	// 		toast.success(`${result.guest}, sua confirmação foi realizada com sucesso.`, {
-	// 			duration: 5000,
-	// 		});
+			reset();
+			toast.success(`${result.guest}, sua confirmação foi realizada com sucesso.`, {
+				duration: 5000,
+			});
 
-	// 		router.push(`/presenca/confirmacao?guest=${data.name}`);
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 		errorHandler(error);
-	// 	}
-	// }
+			router.push(`/presenca/confirmacao?guest=${data.name}`);
+		} catch (error) {
+			console.log(error);
+			errorHandler(error);
+		}
+	}
 
 	return (
 		<form
-			// onSubmit={handleSubmit(handleConfirmationFormSubmit)}
+			onSubmit={handleSubmit(handleConfirmationFormSubmit)}
 			className="mt-8 space-y-6 rounded-[8px] border p-8 shadow"
 		>
 			<div className="lg:grid-cols-form flex flex-col gap-3 pt-5 lg:grid">

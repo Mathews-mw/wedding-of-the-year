@@ -11,6 +11,7 @@ import { ImageHeader } from './image-header';
 import { Camera, Church, Clock5, Gift, MapPin, PartyPopper } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { mockProductList } from '@/data/mock-products-list';
+import { WeddingCountdown } from '@/components/weeding-countdown';
 
 const caveat = Caveat({
 	subsets: ['latin'],
@@ -28,6 +29,8 @@ export default function Home() {
 	return (
 		<div className="h-full space-y-6">
 			<ImageHeader />
+
+			<WeddingCountdown />
 
 			<div className={twMerge(['font bg-main/30 rounded-[8px] px-4 py-8 text-2xl font-light', caveat.className])}>
 				<p className="indent-6">Queridos amigos e familiares,</p>

@@ -114,7 +114,7 @@ export async function POST(request: NextRequest) {
 				itemQuantity: item.quantity,
 				productId: item.reference_id,
 				orderId: order.id,
-				price: item.unit_amount,
+				price: item.unit_amount / 100,
 			};
 		});
 
