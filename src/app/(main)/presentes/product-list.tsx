@@ -32,7 +32,7 @@ export function ProductList() {
 	return (
 		<>
 			<div className="mt-8 space-y-4 px-2">
-				<div className="w-full space-y-4 lg:flex lg:justify-between">
+				<div className="flex w-full justify-between gap-2 space-y-4">
 					{cart.length <= 0 ? (
 						<EmptyCartModal />
 					) : (

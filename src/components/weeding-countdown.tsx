@@ -58,7 +58,7 @@ export function WeddingCountdown() {
 	}, [targetDate]);
 
 	return (
-		<div className="flex flex-col items-center gap-4">
+		<div className="flex flex-col items-center gap-2">
 			<div className="flex items-center gap-2">
 				<Timer className="size-6 animate-pulse text-rose-400" />
 				<h4>Contagem para o grande dia</h4>

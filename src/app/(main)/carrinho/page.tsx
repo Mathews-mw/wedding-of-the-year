@@ -1,21 +1,22 @@
 'use client';
 
-import { useState } from 'react';
-
-import { listingProductsToSetupCheckout } from '@/app/api/@requests/listing-products-to-setup-checkout';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Separator } from '@/components/ui/separator';
-import { Textarea } from '@/components/ui/textarea';
-import { useCart } from '@/context/cart-context';
-import { useMutation, useQuery } from '@tanstack/react-query';
-import { Trash2 } from 'lucide-react';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useMutation, useQuery } from '@tanstack/react-query';
+
+import { useCart } from '@/context/cart-context';
 import { createCheckout } from '@/app/api/@requests/create-checkout';
-import { toast } from 'sonner';
 import { errorHandler } from '@/app/api/@requests/error-handler/error-handler';
+import { listingProductsToSetupCheckout } from '@/app/api/@requests/listing-products-to-setup-checkout';
+
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
+import { Separator } from '@/components/ui/separator';
+
+import { Trash2 } from 'lucide-react';
 
 export default function OrderPage() {
 	const router = useRouter();
@@ -71,8 +72,14 @@ export default function OrderPage() {
 		}
 	}
 
+	useEffect(() => {
+		if (cart.length <= 0) {
+			router.push('/presentes');
+		}
+	}, []);
+
 	return (
-		<div className="hiddenOnPhone:px-4 mt-8 space-y-8">
+		<div className="hiddenOnPhone:px-4 mt-20 space-y-8 px-4 lg:mt-8 lg:px-0">
 			<h3 className="text-2xl font-semibold">Resumo da sua compra</h3>
 
 			<div className="flex w-full flex-col gap-4">

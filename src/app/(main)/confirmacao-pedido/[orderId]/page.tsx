@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import PageContent from './page-content';
+import { PageContent } from './page-content';
 
 interface IPageProps {
 	params: Promise<{

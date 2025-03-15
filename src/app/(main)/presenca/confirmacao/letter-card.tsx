@@ -15,7 +15,7 @@ export function LetterCard() {
 	const guestName = searchParams.get('guest');
 
 	return (
-		<div className={twMerge(['font bg-main/30 rounded-[8px] px-4 py-8 text-2xl font-light', caveat.className])}>
+		<div className={twMerge(['font bg-main/30 px-4 py-8 text-2xl font-light lg:rounded-lg', caveat.className])}>
 			<p className="indent-10">{guestName}, </p>
 			<br />
 
@@ -26,7 +26,7 @@ export function LetterCard() {
 			</p>
 			<br />
 
-			<p className="indent-10">Com toda nossa gratidão, Laura e Fábio.</p>
+			<p className="indent-10">Com toda nossa gratidão, Fábio e Laura.</p>
 			<br />
 
 			<p className="text-center text-xl">Nos vemos na cerimônia. Até breve!</p>

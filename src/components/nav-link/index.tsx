@@ -8,9 +8,8 @@ export function NavLink() {
 	// const { status } = useSession();
 
 	return (
-		<nav className="hiddenOnPhone:hidden flex flex-row items-center space-x-4">
+		<nav className="hidden space-x-4 lg:flex lg:flex-row lg:items-center">
 			<NavItem href="/" title="Home" />
-			{/* <NavItem href="/wishlist" title="Lista de desejos" /> */}
 			<NavItem href="/presentes" title="Lista de presentes" />
 			<NavItem href="/presenca" title="Confirme sua presença" />
 
