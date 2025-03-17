@@ -26,8 +26,6 @@ export async function POST(request: NextRequest) {
 
 	const data = await request.json();
 
-	console.log('checkout body request: ', data);
-
 	const { productIds, name, message } = bodySchema.parse(data);
 
 	try {

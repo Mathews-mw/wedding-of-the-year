@@ -1,5 +1,8 @@
 -- CreateEnum
-CREATE TYPE "OrderStatus" AS ENUM ('PAID', 'AUTHORIZED', 'IN_ANALYSIS', 'DECLINED', 'CANCELED');
+CREATE TYPE "OrderStatus" AS ENUM ('PAID', 'AUTHORIZED', 'IN_ANALYSIS', 'DECLINED', 'CANCELED', 'AWAITING', 'CONFIRMED');
+
+-- CreateEnum
+CREATE TYPE "OrderPaymentType" AS ENUM ('A_DEFINIR', 'PIX', 'CARTAO_CREDITO', 'DEBITO', 'BOLETO');
 
 -- CreateTable
 CREATE TABLE "users" (
@@ -40,7 +43,8 @@ CREATE TABLE "products" (
     "description" TEXT NOT NULL,
     "image" TEXT NOT NULL,
     "price" DOUBLE PRECISION NOT NULL,
-    "amount" INTEGER NOT NULL,
+    "quantity_available" INTEGER NOT NULL DEFAULT 1,
+    "initial_quantity" INTEGER NOT NULL DEFAULT 1,
     "available" BOOLEAN NOT NULL DEFAULT true,
 
     CONSTRAINT "products_pkey" PRIMARY KEY ("id")
@@ -55,10 +59,9 @@ CREATE TABLE "orders" (
     "checkout_id" TEXT NOT NULL,
     "reference_id" TEXT NOT NULL,
     "status" "OrderStatus" NOT NULL DEFAULT 'IN_ANALYSIS',
-    "link_self" TEXT,
-    "link_pay" TEXT,
-    "link_inactive" TEXT,
+    "payment_type" "OrderPaymentType" NOT NULL DEFAULT 'A_DEFINIR',
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3),
 
     CONSTRAINT "orders_pkey" PRIMARY KEY ("id")
 );
@@ -71,6 +74,7 @@ CREATE TABLE "order_products" (
     "item_quantity" INTEGER NOT NULL,
     "product_id" TEXT NOT NULL,
     "order_id" TEXT NOT NULL,
+    "price" DOUBLE PRECISION NOT NULL,
 
     CONSTRAINT "order_products_pkey" PRIMARY KEY ("id")
 );

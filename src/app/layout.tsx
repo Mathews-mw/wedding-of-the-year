@@ -10,6 +10,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 
 import { CartContextProvider } from '@/context/cart-context';
 import { TanstackQueryClientProvider } from '@/providers/tanstack-query-client-provider';
+import { NextAuthSessionProvider } from '@/providers/session-provider';
 
 dayjs.locale('pt-br');
 dayjs.extend(utc);
@@ -45,7 +46,9 @@ export default function RootLayout({
 
 			<body className={`${nunitoSans.className} antialiased`}>
 				<TanstackQueryClientProvider>
-					<CartContextProvider>{children}</CartContextProvider>
+					<NextAuthSessionProvider>
+						<CartContextProvider>{children}</CartContextProvider>
+					</NextAuthSessionProvider>
 				</TanstackQueryClientProvider>
 
 				<Toaster richColors closeButton duration={1000 * 10} />

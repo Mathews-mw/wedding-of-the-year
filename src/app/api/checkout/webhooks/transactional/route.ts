@@ -86,8 +86,8 @@ export async function POST(request: NextRequest) {
 					});
 
 					if (dbProduct) {
-						dbProduct.amount = dbProduct.amount - 1;
-						dbProduct.available = dbProduct.amount > 0;
+						dbProduct.quantityAvailable = dbProduct.quantityAvailable - 1;
+						dbProduct.available = dbProduct.quantityAvailable > 0;
 
 						await prisma.product.update({
 							data: dbProduct,

@@ -1,5 +1,6 @@
 'use client';
 
+import { twMerge } from 'tailwind-merge';
 import { useRouter } from 'next/navigation';
 import { useMutation } from '@tanstack/react-query';
 import { signOut, useSession } from 'next-auth/react';
@@ -7,6 +8,7 @@ import { signOut, useSession } from 'next-auth/react';
 import { Button } from './ui/button';
 import { Skeleton } from './ui/skeleton';
 import { Dialog, DialogTrigger } from './ui/dialog';
+import { StoreProfileDialog } from './store-profile-dialog';
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -62,16 +64,25 @@ export function AccountMenu() {
 							<span>Perfil do usuário</span>
 						</DropdownMenuItem>
 					</DialogTrigger>
-					<DropdownMenuItem asChild className="text-rose-500 dark:text-rose-400">
-						<button className="w-full cursor-pointer" onClick={() => signOutFn()} disabled={isPendingSignOut}>
-							<LogOut className="mr-2 h-4 w-4" />
+
+					<DropdownMenuItem asChild className="text-rose-400" disabled={isPendingSignOut}>
+						<button
+							onClick={() => signOutFn()}
+							disabled={isPendingSignOut}
+							className={twMerge([
+								'flex w-full cursor-pointer items-center gap-2 px-2 py-1 text-rose-400',
+								'active:scale-[1.01] active:opacity-80',
+								'disabled:opacity-50',
+							])}
+						>
+							<LogOut className="mr-2 h-4 w-4 text-rose-400" />
 							<span>Sair</span>
 						</button>
 					</DropdownMenuItem>
 				</DropdownMenuContent>
 			</DropdownMenu>
 
-			{/* <StoreProfileDialog /> */}
+			<StoreProfileDialog />
 		</Dialog>
 	);
 }
