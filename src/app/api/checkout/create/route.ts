@@ -60,18 +60,18 @@ export async function POST(request: NextRequest) {
 					discount_amount: 0,
 					payment_methods: [
 						{
+							type: 'PIX',
+						},
+						{
+							type: 'BOLETO',
+						},
+						{
 							type: 'CREDIT_CARD',
 							brands: ['MASTERCARD', 'VISA'],
 						},
 						{
 							type: 'DEBIT_CARD',
 							brands: ['MASTERCARD', 'VISA'],
-						},
-						{
-							type: 'PIX',
-						},
-						{
-							type: 'BOLETO',
 						},
 					],
 					payment_methods_configs: [
