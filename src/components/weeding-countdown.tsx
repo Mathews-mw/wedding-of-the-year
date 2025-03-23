@@ -13,7 +13,7 @@ interface TimeLeft {
 
 export function WeddingCountdown() {
 	const targetDate = useMemo(() => {
-		return new Date(2025, 4, 18, 18, 0, 0);
+		return new Date(2025, 4, 17, 18, 0, 0);
 	}, []);
 
 	const [timeLeft, setTimeLeft] = useState<TimeLeft>({
